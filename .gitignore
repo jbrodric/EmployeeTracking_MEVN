@@ -5,3 +5,4 @@
 # Express
 bin/
 node_modules/
+.env
