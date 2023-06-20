@@ -1,16 +1,14 @@
-const { Schema, model } = require("mongoose");
+module.exports = (mongoose) => {
+  const JobPostingSchema = new mongoose.Schema({
+    title: {
+      type: String,
+      required: true,
+    },
+    description: {
+      type: String,
+      required: true,
+    },
+  });
 
-const JobPostingSchema = new Schema({
-  title: {
-    type: String,
-    required: true,
-  },
-  description: {
-    type: String,
-    required: true,
-  },
-});
-
-const JobPosting = model("jobposting", JobPostingSchema);
-
-module.exports = JobPosting;
+  return mongoose.model("jobposting", JobPostingSchema);
+};

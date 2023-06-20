@@ -1,5 +1,6 @@
 const { Router } = require("express");
-const JobPosting = require("../../../models/JobPosting");
+const initJobPosting = require("../../../models/JobPosting");
+let JobPosting;
 
 const router = Router();
 
@@ -35,4 +36,7 @@ router.delete("/:id", async (req, res) => {
   }
 });
 
-module.exports = router;
+module.exports.JobListRoutes = router;
+module.exports.initModel = (mongoose) => {
+  JobPosting = initJobPosting(mongoose);
+};

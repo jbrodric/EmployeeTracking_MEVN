@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 const { PORT, mongoUri } = require("dotenv").config();
 const cors = require("cors");
 const bodyParser = require("body-parser");
-const JobListRoutes = require("./routes/api/JobList");
+const { JobListRoutes, initModel } = require("./routes/api/JobList");
 const path = require("path");
 
 app.use(cors()); // to allow cross origin requests
@@ -18,6 +18,7 @@ mongoose
   .then(() => {
     console.log("MongoDB database Connected...");
 
+    initModel(mongoose);
     app.use("/api/JobList", JobListRoutes);
 
     app.listen(process.env.PORT, () =>
