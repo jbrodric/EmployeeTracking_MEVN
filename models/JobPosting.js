@@ -11,6 +11,6 @@ const JobPostingSchema = new Schema({
   },
 });
 
-const JobPosting = model("jobPosting", JobPostingSchema);
+const JobPosting = model("jobposting", JobPostingSchema);
 
 module.exports = JobPosting;
