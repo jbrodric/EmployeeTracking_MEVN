@@ -37,6 +37,6 @@ router.delete("/:id", async (req, res) => {
 });
 
 module.exports.JobListRoutes = router;
-module.exports.initModel = (mongoose) => {
+module.exports.initJobListModel = (mongoose) => {
   JobPosting = initJobPosting(mongoose);
 };
