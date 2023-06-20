@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
-const { PORT, mongoUri } = require("dotenv").config();
+const { PORT, MONGO_URI } = require("dotenv").config();
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const { JobListRoutes, initJobListModel } = require("./routes/api/JobList");
