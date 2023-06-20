@@ -15,11 +15,13 @@ mongoose
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
-  .then(() => console.log("MongoDB database Connected..."))
+  .then(() => {
+    console.log("MongoDB database Connected...");
+
+    app.use("/api/JobList", JobListRoutes);
+
+    app.listen(process.env.PORT, () =>
+      console.log(`App listening at http://localhost:${process.env.PORT}`)
+    );
+  })
   .catch((err) => console.log(err));
-
-app.use("/api/JobList", JobListRoutes);
-
-app.listen(process.env.PORT, () =>
-  console.log(`App listening at http://localhost:${process.env.PORT}`)
-);
