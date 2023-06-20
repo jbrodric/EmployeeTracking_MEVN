@@ -1,14 +1,14 @@
 import React from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import JobList from "./components/JobList.js";
 
 const App = () => {
   return (
     <Router>
-      <Switch>
-        <Route path="/" exact component={JobList} />
+      <Routes>
+        <Route path="/" element={<JobList />} />
         {/* Add more routes as needed */}
-      </Switch>
+      </Routes>
     </Router>
   );
 };
