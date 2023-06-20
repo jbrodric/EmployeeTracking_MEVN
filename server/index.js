@@ -22,7 +22,9 @@ mongoose
     app.use(bodyParser.json()); // to convert the request into JSON
     app.use(process.env.API_JOB_LIST_PATH, JobListRoutes);
     app.listen(process.env.PORT, () =>
-      console.log(`App listening at ${process.env.API_BASE_URL}`)
+      console.log(
+        `App listening at ${process.env.API_BASE_URL}:${process.env.PORT}`
+      )
     );
   })
   .catch((err) => console.log(err));
