@@ -7,9 +7,6 @@ const bodyParser = require("body-parser");
 const { JobListRoutes, initJobListModel } = require("./routes/api/JobList");
 const path = require("path");
 
-app.use(cors()); // to allow cross origin requests
-app.use(bodyParser.json()); // to convert the request into JSON
-
 mongoose
   .connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
@@ -19,8 +16,10 @@ mongoose
     console.log("MongoDB database Connected...");
 
     initModel();
-    app.use("/api/JobList", JobListRoutes);
 
+    app.use(cors()); // to allow cross origin requests
+    app.use(bodyParser.json()); // to convert the request into JSON
+    app.use("/api/JobList", JobListRoutes);
     app.listen(process.env.PORT, () =>
       console.log(`App listening at http://localhost:${process.env.PORT}`)
     );
