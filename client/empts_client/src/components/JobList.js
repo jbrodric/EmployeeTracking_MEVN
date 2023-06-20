@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
 import backend from "../api/backend.js";
 
+const jobListAPI = new backend.JobListAPI(backend.API_BASE_URL);
+
 const JobList = () => {
   const [jobs, setJobs] = useState([]);
-  const jobList = new backend.JobListAPI(backend.API_BASE_URL);
 
   useEffect(() => {
     const fetchJobs = async () => {
-      const fetchedJobs = await jobList.getJobListDB();
+      const fetchedJobs = await jobListAPI.getJobListDB();
       setJobs(fetchedJobs);
     };
 
