@@ -25,6 +25,18 @@ router.post("/", async (req, res) => {
   }
 });
 
+router.put("/", async (req, res) => {
+  const newJob = new JobPosting(req.body);
+  try {
+    newJob.isNew = false;
+    const job = await newJob.save();
+    if (!job) throw new Error("Something went wrong saving the job");
+    res.status(200).json(job);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
 router.delete("/:id", async (req, res) => {
   const { id } = req.params;
   try {

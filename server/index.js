@@ -18,7 +18,7 @@ mongoose
   .then(() => {
     console.log("MongoDB database Connected...");
 
-    initJobListModel(mongoose);
+    initModel();
     app.use("/api/JobList", JobListRoutes);
 
     app.listen(process.env.PORT, () =>
@@ -26,3 +26,7 @@ mongoose
     );
   })
   .catch((err) => console.log(err));
+
+function initModel() {
+  initJobListModel(mongoose);
+}
