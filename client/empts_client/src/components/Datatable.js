@@ -394,13 +394,17 @@ export default function EnhancedTable(props) {
                             id={labelId}
                             scope="row"
                             padding="none"
+                            key={row.id + "_" + headCell.id}
                           >
                             {row[headCell.id]}
                           </TableCell>
                         );
                       } else {
                         return (
-                          <TableCell align="right">
+                          <TableCell
+                            align="right"
+                            key={row.id + "_" + headCell.id}
+                          >
                             {row[headCell.id]}
                           </TableCell>
                         );
