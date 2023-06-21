@@ -5,8 +5,15 @@ export async function loader({ params }) {
   const jobListAPI = new backend.JobListAPI(backend.API_BASE_URL);
   let job;
 
-  if (params.jobId) job = await jobListAPI.getJobDB(params.jobId);
-  else job = backend.JobListAPI.createJob("", "");
+  if (params.jobId) {
+    job = await jobListAPI.getJobDB(params.jobId);
+    if (!job) {
+      throw new Response("", {
+        status: 404,
+        statusText: "Not Found",
+      });
+    }
+  } else job = backend.JobListAPI.createJob("", "");
 
   return { job };
 }
