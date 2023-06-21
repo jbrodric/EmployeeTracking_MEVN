@@ -14,6 +14,17 @@ router.get("/", async (req, res) => {
   }
 });
 
+router.get("/:id", async (req, res) => {
+  const { id } = req.params;
+  try {
+    const jobList = await JobPosting.findOne({ _id: id }).exec();
+    if (!jobList) throw new Error("No Jobs found");
+    res.status(200).json(jobList);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
 router.post("/", async (req, res) => {
   const newJob = new JobPosting(req.body);
   try {
