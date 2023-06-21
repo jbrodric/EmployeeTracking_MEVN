@@ -1,6 +1,6 @@
 import React from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import JobList from "./components/JobList.js";
+import JobList, { loader as jobListLoader } from "./components/JobList.js";
 import Root from "./components/root.js";
 import ErrorPage from "./error.js";
 import Job from "./components/Job.js";
@@ -14,6 +14,7 @@ const router = createBrowserRouter([
       {
         path: "/Jobs",
         element: <JobList />,
+        loader: jobListLoader,
       },
       {
         path: "/Job/:jobId",
