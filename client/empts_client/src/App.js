@@ -1,15 +1,29 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  createBrowserRouter,
+  RouterProvider,
+  Routes,
+  Route,
+} from "react-router-dom";
 import JobList from "./components/JobList.js";
+import Root from "./components/root.js";
+import ErrorPage from "./error.js";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Root />,
+    errorElement: <ErrorPage />,
+  },
+]);
 
 const App = () => {
   return (
-    <Router>
+    <RouterProvider router={router}>
       <Routes>
-        <Route path="/" element={<JobList />} />
-        {/* Add more routes as needed */}
+        <Route path="/Jobs" element={<JobList />} />
       </Routes>
-    </Router>
+    </RouterProvider>
   );
 };
 
