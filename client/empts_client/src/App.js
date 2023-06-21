@@ -17,31 +17,36 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
     children: [
       {
-        path: "/Jobs",
-        element: <JobList />,
-        loader: jobListLoader,
-        action: jobListAction,
-      },
-      {
-        path: "/Job/:jobId",
-        element: <Job />,
-        loader: jobLoader,
-      },
-      {
-        path: "/Job/:jobId/edit",
-        element: <EditJob />,
-        loader: jobLoader,
-        action: editJobAction,
-      },
-      {
-        path: "/Job/:jobId/destroy",
-        action: deleteJobAction,
-      },
-      {
-        path: "/Job",
-        element: <EditJob />,
-        loader: jobLoader,
-        action: editJobAction,
+        errorElement: <ErrorPage />,
+        children: [
+          {
+            path: "/Jobs",
+            element: <JobList />,
+            loader: jobListLoader,
+            action: jobListAction,
+          },
+          {
+            path: "/Job/:jobId",
+            element: <Job />,
+            loader: jobLoader,
+          },
+          {
+            path: "/Job/:jobId/edit",
+            element: <EditJob />,
+            loader: jobLoader,
+            action: editJobAction,
+          },
+          {
+            path: "/Job/:jobId/destroy",
+            action: deleteJobAction,
+          },
+          {
+            path: "/Job",
+            element: <EditJob />,
+            loader: jobLoader,
+            action: editJobAction,
+          },
+        ],
       },
     ],
   },
