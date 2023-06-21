@@ -1,7 +1,8 @@
-import { Form } from "react-router-dom";
+import { Form, Link } from "react-router-dom";
 import backend from "../api/backend.js";
 
 export default function Job() {
+  const jobListAPI = new backend.JobListAPI(backend.API_BASE_URL);
   const job = backend.JobListAPI.createJob("test title", "test descr");
 
   return (
@@ -34,13 +35,7 @@ export default function Job() {
           >
             <button type="submit">Delete</button>
           </Form>
-          <input
-            type="button"
-            value="Cancel"
-            onClick={() => {
-              window.location.href = "/Jobs";
-            }}
-          />
+          <Link to={"/Jobs"}>Cancel</Link>
         </div>
       </div>
     </div>

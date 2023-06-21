@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import backend from "../api/backend.js";
+import { Link } from "react-router-dom";
 
 const jobListAPI = new backend.JobListAPI(backend.API_BASE_URL);
 
@@ -22,9 +23,9 @@ const JobList = () => {
       <ul>
         {jobs.map((job) => (
           <li key={job._id}>
-            <a href={"/Job/" + job._id}>
+            <Link to={"/Job/" + job._id}>
               {job.title} - {job.description}
-            </a>
+            </Link>
           </li>
         ))}
       </ul>

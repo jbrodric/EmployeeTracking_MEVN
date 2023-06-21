@@ -16,6 +16,15 @@ class JobListAPI {
     return new Job(title, description);
   }
 
+  async getJobDB(id) {
+    try {
+      const response = await axios.get(this.jobListEndPoint + "/" + id);
+      return response.data;
+    } catch (error) {
+      console.error("Error fetching job:", error);
+    }
+  }
+
   async getJobListDB() {
     try {
       const response = await axios.get(this.jobListEndPoint);

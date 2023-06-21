@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { icon } from "@fortawesome/fontawesome-svg-core/import.macro";
-import { Outlet } from "react-router-dom";
+import { Outlet, Link } from "react-router-dom";
 
 export default function Root() {
   return (
@@ -16,10 +16,10 @@ export default function Root() {
         <nav>
           <ul>
             <li>
-              <a href={`/`}>Home</a>
+              <Link to={`/`}>Home</Link>
             </li>
             <li>
-              <a href={`/Jobs`}>Jobs</a>
+              <Link to={`/Jobs`}>Jobs</Link>
             </li>
           </ul>
         </nav>
