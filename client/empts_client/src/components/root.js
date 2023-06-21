@@ -1,8 +1,10 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { icon } from "@fortawesome/fontawesome-svg-core/import.macro";
-import { Outlet, Link } from "react-router-dom";
+import { Outlet, Link, useNavigation } from "react-router-dom";
 
 export default function Root() {
+  const navigation = useNavigation();
+
   return (
     <>
       <div id="sidebar">
@@ -24,7 +26,10 @@ export default function Root() {
           </ul>
         </nav>
       </div>
-      <div id="detail">
+      <div
+        id="detail"
+        className={navigation.state === "loading" ? "loading" : ""}
+      >
         <Outlet />
       </div>
     </>
