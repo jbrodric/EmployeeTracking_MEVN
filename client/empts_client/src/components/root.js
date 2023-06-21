@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { icon } from "@fortawesome/fontawesome-svg-core/import.macro";
-import { Outlet, Link, useNavigation } from "react-router-dom";
+import { Outlet, useNavigation, NavLink } from "react-router-dom";
 
 export default function Root() {
   const navigation = useNavigation();
@@ -18,10 +18,24 @@ export default function Root() {
         <nav>
           <ul>
             <li>
-              <Link to={`/`}>Home</Link>
+              <NavLink
+                to={`/`}
+                className={({ isActive, isPending }) =>
+                  isActive ? "active" : isPending ? "pending" : ""
+                }
+              >
+                Home
+              </NavLink>
             </li>
             <li>
-              <Link to={`/Jobs`}>Jobs</Link>
+              <NavLink
+                to={`/Jobs`}
+                className={({ isActive, isPending }) =>
+                  isActive ? "active" : isPending ? "pending" : ""
+                }
+              >
+                Jobs
+              </NavLink>
             </li>
           </ul>
         </nav>
