@@ -8,6 +8,7 @@ import Root from "./components/root.js";
 import ErrorPage from "./error.js";
 import Job, { loader as jobLoader } from "./components/Job.js";
 import EditJob, { action as editJobAction } from "./components/EditJob.js";
+import { action as deleteJobAction } from "./components/DeleteJob.js";
 
 const router = createBrowserRouter([
   {
@@ -31,6 +32,10 @@ const router = createBrowserRouter([
         element: <EditJob />,
         loader: jobLoader,
         action: editJobAction,
+      },
+      {
+        path: "/Job/:jobId/destroy",
+        action: deleteJobAction,
       },
       {
         path: "/Job",
