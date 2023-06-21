@@ -1,6 +1,7 @@
 import React from "react";
 import { Link, useLoaderData, Form, redirect } from "react-router-dom";
 import backend from "../api/backend.js";
+import Datatable from "./Datatable.js";
 
 export async function loader() {
   const jobListAPI = new backend.JobListAPI(backend.API_BASE_URL);
@@ -37,6 +38,7 @@ export default function JobList() {
           </p>
         )}
       </ul>
+      <Datatable title="Available Jobs" />
     </div>
   );
 }
