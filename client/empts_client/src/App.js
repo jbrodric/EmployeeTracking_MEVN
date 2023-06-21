@@ -1,9 +1,13 @@
 import React from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import JobList, { loader as jobListLoader } from "./components/JobList.js";
+import JobList, {
+  loader as jobListLoader,
+  action as jobListAction,
+} from "./components/JobList.js";
 import Root from "./components/root.js";
 import ErrorPage from "./error.js";
-import Job from "./components/Job.js";
+import Job, { loader as jobLoader } from "./components/Job.js";
+import EditJob, { action as editJobAction } from "./components/EditJob.js";
 
 const router = createBrowserRouter([
   {
@@ -15,14 +19,24 @@ const router = createBrowserRouter([
         path: "/Jobs",
         element: <JobList />,
         loader: jobListLoader,
+        action: jobListAction,
       },
       {
         path: "/Job/:jobId",
         element: <Job />,
+        loader: jobLoader,
+      },
+      {
+        path: "/Job/:jobId/edit",
+        element: <EditJob />,
+        loader: jobLoader,
+        action: editJobAction,
       },
       {
         path: "/Job",
-        element: <Job />,
+        element: <EditJob />,
+        loader: jobLoader,
+        action: editJobAction,
       },
     ],
   },

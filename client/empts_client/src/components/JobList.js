@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useLoaderData } from "react-router-dom";
+import { Link, useLoaderData, Form, redirect } from "react-router-dom";
 import backend from "../api/backend.js";
 
 export async function loader() {
@@ -8,11 +8,20 @@ export async function loader() {
   return { jobList };
 }
 
+export async function action() {
+  return redirect("/Job");
+}
+
 export default function JobList() {
   const { jobList } = useLoaderData();
   return (
     <div>
-      <h2>Available Jobs</h2>
+      <div>
+        <h2>Available Jobs</h2>
+        <Form method="post">
+          <button type="submit">New</button>
+        </Form>
+      </div>
       <ul>
         {jobList && jobList.length ? (
           jobList.map((job) => (

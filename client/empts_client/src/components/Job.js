@@ -1,17 +1,23 @@
-import { Form, Link } from "react-router-dom";
+import { Form, useLoaderData } from "react-router-dom";
 import backend from "../api/backend.js";
 
+export async function loader({ params }) {
+  const jobListAPI = new backend.JobListAPI(backend.API_BASE_URL);
+  let job;
+
+  if (params.jobId) job = await jobListAPI.getJobDB(params.jobId);
+  else job = backend.JobListAPI.createJob("", "");
+
+  return { job };
+}
+
 export default function Job() {
-  const job = backend.JobListAPI.createJob("test title", "test descr");
+  const { job } = useLoaderData();
 
   return (
     <div id="job">
       <div>
-        <h1>
-          {job.title}
-          {/* {" "}
-          <Favorite contact={contact} /> */}
-        </h1>
+        <h1>{job.title}</h1>
 
         {<p>{job.description}</p>}
 
@@ -34,7 +40,6 @@ export default function Job() {
           >
             <button type="submit">Delete</button>
           </Form>
-          <Link to={"/Jobs"}>Cancel</Link>
         </div>
       </div>
     </div>
