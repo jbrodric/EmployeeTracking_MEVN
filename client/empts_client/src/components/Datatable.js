@@ -50,6 +50,8 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import { visuallyHidden } from "@mui/utils";
 
+const MAX_TEXT_LEN = 75;
+
 class DataModel {
   autonumber = (() => {
     let counter = 0;
@@ -57,11 +59,24 @@ class DataModel {
       return "" + counter++;
     };
   })();
+
   constructor(rowData, columnData) {
     this.headCells = columnData;
 
     this.rows = rowData.map((row) => {
-      return { _datatable_id: this.autonumber(), ...row };
+      let newRow = { _datatable_id: this.autonumber(), ...row };
+
+      for (let headCell of this.headCells) {
+        if (
+          headCell.type &&
+          headCell.type === "text" &&
+          newRow[headCell.id].length > MAX_TEXT_LEN
+        )
+          newRow[headCell.id] =
+            newRow[headCell.id].slice(0, MAX_TEXT_LEN) + "...";
+      }
+
+      return newRow;
     });
   }
 }
