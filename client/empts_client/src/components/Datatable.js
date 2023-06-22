@@ -342,7 +342,10 @@ export default function EnhancedTable(props) {
                             component="th"
                             id={labelId}
                             scope="row"
-                            padding="none"
+                            align={headCell.numeric ? "right" : "left"}
+                            padding={
+                              headCell.disablePadding ? "none" : "normal"
+                            }
                             key={row._datatable_id + "_" + headCell.id}
                           >
                             {row[headCell.id]}
@@ -351,7 +354,10 @@ export default function EnhancedTable(props) {
                       } else {
                         return (
                           <TableCell
-                            align="right"
+                            align={headCell.numeric ? "right" : "left"}
+                            padding={
+                              headCell.disablePadding ? "none" : "normal"
+                            }
                             key={row._datatable_id + "_" + headCell.id}
                           >
                             {row[headCell.id]}
@@ -368,7 +374,7 @@ export default function EnhancedTable(props) {
                     height: (dense ? 33 : 53) * emptyRows,
                   }}
                 >
-                  <TableCell colSpan={6} />
+                  <TableCell colSpan={data.headCells.length + 1} />
                 </TableRow>
               )}
             </TableBody>
