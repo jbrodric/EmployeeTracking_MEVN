@@ -59,6 +59,12 @@ export default function Root() {
       >
         <Outlet />
       </div>
+      <div id="footer">
+        <hr></hr>
+        <p>
+          <i>Employee Tracking System ©2023</i>
+        </p>
+      </div>
     </>
   );
 }

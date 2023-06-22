@@ -9,7 +9,10 @@ export default function Home() {
         width="40%"
         style={{ float: "left", margin: "15px" }}
       />
-      <h1>Our Story</h1>
+      <h1>Find the Right Candidates</h1>
+      <h3>
+        <i>Home of No Hassle Hiring</i>
+      </h3>
       <p>
         Lorem ipsum dolor sit amet consectetur adipiscing elit, neque
         sollicitudin cras augue praesent taciti, arcu turpis ultrices mauris at
