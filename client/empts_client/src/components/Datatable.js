@@ -49,6 +49,7 @@ import Switch from "@mui/material/Switch";
 import DeleteIcon from "@mui/icons-material/Delete";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import { visuallyHidden } from "@mui/utils";
+import { Link } from "react-router-dom";
 
 const MAX_TEXT_LEN = 75;
 
@@ -235,7 +236,7 @@ EnhancedTableToolbar.propTypes = {
 };
 
 export default function EnhancedTable(props) {
-  const { title, data } = props;
+  const { title, data, recordIdField, recordURL } = props;
   const [order, setOrder] = React.useState("asc");
   const [orderBy, setOrderBy] = React.useState(data.headCells[0].id);
   const [selected, setSelected] = React.useState([]);
@@ -363,7 +364,9 @@ export default function EnhancedTable(props) {
                             }
                             key={row._datatable_id + "_" + headCell.id}
                           >
-                            {row[headCell.id]}
+                            <Link to={recordURL + row[recordIdField]}>
+                              {row[headCell.id]}
+                            </Link>
                           </TableCell>
                         );
                       } else {

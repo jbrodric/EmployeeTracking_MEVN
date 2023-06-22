@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useLoaderData, Form, redirect } from "react-router-dom";
+import { useLoaderData, Form, redirect } from "react-router-dom";
 import backend from "../api/backend.js";
 import Datatable, { DataModel } from "./Datatable.js";
 
@@ -40,22 +40,12 @@ export default function JobList() {
           <button type="submit">New</button>
         </Form>
       </div>
-      <ul>
-        {jobList && jobList.length ? (
-          jobList.map((job) => (
-            <li key={job._id}>
-              <Link to={"/Job/" + job._id}>
-                {job.title} - {job.description}
-              </Link>
-            </li>
-          ))
-        ) : (
-          <p>
-            <i>No Jobs</i>
-          </p>
-        )}
-      </ul>
-      <Datatable title="Available Jobs" data={data} />
+      <Datatable
+        title="Available Jobs"
+        data={data}
+        recordURL="/Job/"
+        recordIdField="_id"
+      />
     </div>
   );
 }
