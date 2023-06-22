@@ -40,6 +40,16 @@ export default function Root() {
                 Jobs
               </NavLink>
             </li>
+            <li>
+              <NavLink
+                to={`/About`}
+                className={({ isActive, isPending }) =>
+                  isActive ? "active" : isPending ? "pending" : ""
+                }
+              >
+                About
+              </NavLink>
+            </li>
           </ul>
         </nav>
       </div>
