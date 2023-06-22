@@ -59,10 +59,10 @@ class DataModel {
   })();
   constructor(rowData, columnData) {
     this.headCells = columnData;
-    rowData.forEach((row) => {
-      row.id = this.autonumber();
+
+    this.rows = rowData.map((row) => {
+      return { _datatable_id: this.autonumber(), ...row };
     });
-    this.rows = rowData;
   }
 }
 
@@ -236,7 +236,7 @@ export default function EnhancedTable(props) {
 
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
-      const newSelected = data.rows.map((n) => n.id);
+      const newSelected = data.rows.map((n) => n._datatable_id);
       setSelected(newSelected);
       return;
     }
@@ -312,17 +312,17 @@ export default function EnhancedTable(props) {
             />
             <TableBody>
               {visibleRows.map((row, index) => {
-                const isItemSelected = isSelected(row.id);
+                const isItemSelected = isSelected(row._datatable_id);
                 const labelId = `enhanced-table-checkbox-${index}`;
 
                 return (
                   <TableRow
                     hover
-                    onClick={(event) => handleClick(event, row.id)}
+                    onClick={(event) => handleClick(event, row._datatable_id)}
                     role="checkbox"
                     aria-checked={isItemSelected}
                     tabIndex={-1}
-                    key={row.id}
+                    key={row._datatable_id}
                     selected={isItemSelected}
                     sx={{ cursor: "pointer" }}
                   >
@@ -343,7 +343,7 @@ export default function EnhancedTable(props) {
                             id={labelId}
                             scope="row"
                             padding="none"
-                            key={row.id + "_" + headCell.id}
+                            key={row._datatable_id + "_" + headCell.id}
                           >
                             {row[headCell.id]}
                           </TableCell>
@@ -352,7 +352,7 @@ export default function EnhancedTable(props) {
                         return (
                           <TableCell
                             align="right"
-                            key={row.id + "_" + headCell.id}
+                            key={row._datatable_id + "_" + headCell.id}
                           >
                             {row[headCell.id]}
                           </TableCell>
