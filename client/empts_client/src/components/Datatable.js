@@ -1,3 +1,31 @@
+/*
+Dependencies
+
+@emotion/react
+11.11.1
+
+@emotion/styled
+11.11.0
+
+@mui/icons-material
+5.11.16
+
+@mui/material
+5.13.5
+
+@mui/utils
+5.13.1
+
+prop-types
+15.8.1
+
+react
+18.2.0
+
+react-dom
+18.2.0
+
+*/
 import * as React from "react";
 import PropTypes from "prop-types";
 import { alpha } from "@mui/material/styles";
@@ -22,69 +50,21 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import { visuallyHidden } from "@mui/utils";
 
-const autonumber = (() => {
-  let counter = 0;
-  return () => {
-    return counter++;
-  };
-})();
-
-function createData(params) {
-  params.id = "" + autonumber();
-  return params;
+class DataModel {
+  autonumber = (() => {
+    let counter = 0;
+    return () => {
+      return "" + counter++;
+    };
+  })();
+  constructor(rowData, columnData) {
+    this.headCells = columnData;
+    rowData.forEach((row) => {
+      row.id = this.autonumber();
+    });
+    this.rows = rowData;
+  }
 }
-
-const rows = [
-  createData({
-    name: "Cupcake1",
-    calories: 1,
-    fat: 3.7,
-    carbs: 67,
-    protein: 4.3,
-  }),
-  createData({
-    name: "Cupcake2",
-    calories: 2,
-    fat: 3.7,
-    carbs: 67,
-    protein: 4.3,
-  }),
-  createData({
-    name: "Cupcake3",
-    calories: 3,
-    fat: 3.7,
-    carbs: 67,
-    protein: 4.3,
-  }),
-  createData({
-    name: "Cupcake4",
-    calories: 4,
-    fat: 3.7,
-    carbs: 67,
-    protein: 4.3,
-  }),
-  createData({
-    name: "Cupcake5",
-    calories: 5,
-    fat: 3.7,
-    carbs: 67,
-    protein: 4.3,
-  }),
-  createData({
-    name: "Cupcake6",
-    calories: 6,
-    fat: 3.7,
-    carbs: 67,
-    protein: 4.3,
-  }),
-  createData({
-    name: "Cupcake7",
-    calories: 7,
-    fat: 3.7,
-    carbs: 67,
-    protein: 4.3,
-  }),
-];
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -118,39 +98,6 @@ function stableSort(array, comparator) {
   return stabilizedThis.map((el) => el[0]);
 }
 
-const headCells = [
-  {
-    id: "name",
-    numeric: false,
-    disablePadding: true,
-    label: "Dessert (100g serving)",
-  },
-  {
-    id: "calories",
-    numeric: true,
-    disablePadding: false,
-    label: "Calories",
-  },
-  {
-    id: "fat",
-    numeric: true,
-    disablePadding: false,
-    label: "Fat (g)",
-  },
-  {
-    id: "carbs",
-    numeric: true,
-    disablePadding: false,
-    label: "Carbs (g)",
-  },
-  {
-    id: "protein",
-    numeric: true,
-    disablePadding: false,
-    label: "Protein (g)",
-  },
-];
-
 function EnhancedTableHead(props) {
   const {
     onSelectAllClick,
@@ -159,6 +106,7 @@ function EnhancedTableHead(props) {
     numSelected,
     rowCount,
     onRequestSort,
+    data,
   } = props;
   const createSortHandler = (property) => (event) => {
     onRequestSort(event, property);
@@ -178,7 +126,7 @@ function EnhancedTableHead(props) {
             }}
           />
         </TableCell>
-        {headCells.map((headCell) => (
+        {data.headCells.map((headCell) => (
           <TableCell
             key={headCell.id}
             align={headCell.numeric ? "right" : "left"}
@@ -272,9 +220,9 @@ EnhancedTableToolbar.propTypes = {
 };
 
 export default function EnhancedTable(props) {
-  const { title } = props;
+  const { title, data } = props;
   const [order, setOrder] = React.useState("asc");
-  const [orderBy, setOrderBy] = React.useState(headCells[0].id);
+  const [orderBy, setOrderBy] = React.useState(data.headCells[0].id);
   const [selected, setSelected] = React.useState([]);
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
@@ -288,7 +236,7 @@ export default function EnhancedTable(props) {
 
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
-      const newSelected = rows.map((n) => n.id);
+      const newSelected = data.rows.map((n) => n.id);
       setSelected(newSelected);
       return;
     }
@@ -332,15 +280,15 @@ export default function EnhancedTable(props) {
 
   // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
-    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
+    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - data.rows.length) : 0;
 
   const visibleRows = React.useMemo(
     () =>
-      stableSort(rows, getComparator(order, orderBy)).slice(
+      stableSort(data.rows, getComparator(order, orderBy)).slice(
         page * rowsPerPage,
         page * rowsPerPage + rowsPerPage
       ),
-    [order, orderBy, page, rowsPerPage]
+    [order, orderBy, page, rowsPerPage, data.rows]
   );
 
   return (
@@ -359,7 +307,8 @@ export default function EnhancedTable(props) {
               orderBy={orderBy}
               onSelectAllClick={handleSelectAllClick}
               onRequestSort={handleRequestSort}
-              rowCount={rows.length}
+              rowCount={data.rows.length}
+              data={data}
             />
             <TableBody>
               {visibleRows.map((row, index) => {
@@ -386,7 +335,7 @@ export default function EnhancedTable(props) {
                         }}
                       />
                     </TableCell>
-                    {headCells.map((headCell, index) => {
+                    {data.headCells.map((headCell, index) => {
                       if (index === 0) {
                         return (
                           <TableCell
@@ -428,7 +377,7 @@ export default function EnhancedTable(props) {
         <TablePagination
           rowsPerPageOptions={[5, 10, 25]}
           component="div"
-          count={rows.length}
+          count={data.rows.length}
           rowsPerPage={rowsPerPage}
           page={page}
           onPageChange={handleChangePage}
@@ -442,3 +391,5 @@ export default function EnhancedTable(props) {
     </Box>
   );
 }
+
+export { DataModel };
