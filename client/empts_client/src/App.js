@@ -10,6 +10,7 @@ import Job, { loader as jobLoader } from "./components/Job.js";
 import EditJob, { action as editJobAction } from "./components/EditJob.js";
 import { action as deleteJobAction } from "./components/DeleteJob.js";
 import About from "./components/About.js";
+import Home from "./components/Home.js";
 
 const router = createBrowserRouter([
   {
@@ -50,6 +51,10 @@ const router = createBrowserRouter([
           {
             path: "/About",
             element: <About />,
+          },
+          {
+            path: "/",
+            element: <Home />,
           },
         ],
       },
