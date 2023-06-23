@@ -3,6 +3,7 @@ import { icon } from "@fortawesome/fontawesome-svg-core/import.macro";
 import { Outlet, useNavigation, NavLink } from "react-router-dom";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Unstable_Grid2";
+import * as React from "react";
 
 export default function Root() {
   const navigation = useNavigation();
@@ -14,7 +15,7 @@ export default function Root() {
           <Grid xs={12} id="header">
             <p>Employee Tracking System</p>
           </Grid>
-          <Grid xs={2} id="sidebar">
+          <Grid xs={12} md={2} id="sidebar">
             <div id="logo">
               <FontAwesomeIcon
                 icon={icon({ name: "folder-open", style: "solid" })}
@@ -58,7 +59,8 @@ export default function Root() {
             </nav>
           </Grid>
           <Grid
-            xs={10}
+            xs={12}
+            md={10}
             id="detail"
             className={navigation.state === "loading" ? "loading" : ""}
           >
