@@ -391,3 +391,7 @@ i {
   margin: 20px;
   min-height: 800px;
 }
+
+#sidebar nav a.active {
+  background: #1976d2 !important;
+}
