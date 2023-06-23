@@ -389,4 +389,5 @@ i {
 
 #outlet {
   margin: 20px;
+  min-height: 800px;
 }
