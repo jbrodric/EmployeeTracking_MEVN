@@ -11,6 +11,8 @@ import EditJob, { action as editJobAction } from "./components/EditJob.js";
 import { action as deleteJobAction } from "./components/DeleteJob.js";
 import About from "./components/About.js";
 import Home from "./components/Home.js";
+import Applications from "./components/Applications.js";
+import Candidates from "./components/Candidates.js";
 
 const router = createBrowserRouter([
   {
@@ -55,6 +57,14 @@ const router = createBrowserRouter([
           {
             path: "/",
             element: <Home />,
+          },
+          {
+            path: "/Applications",
+            element: <Applications />,
+          },
+          {
+            path: "/Candidates",
+            element: <Candidates />,
           },
         ],
       },
