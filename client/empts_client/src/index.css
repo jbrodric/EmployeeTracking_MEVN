@@ -8,17 +8,9 @@
 
 #footer {
   text-align: center;
-  border-top: solid 1px #e3e3e3;
   height: 100px;
-  background: #f1f1f1;
-}
-
-#outlet {
-  margin-top: 20px;
-  margin-bottom: 50px;
-  margin-left: 10%;
-  margin-right: 10%;
-  min-height: 900px;
+  background: #515052;
+  color: white;
 }
 
 #sidebar a.active {
