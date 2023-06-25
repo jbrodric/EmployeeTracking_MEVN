@@ -7,6 +7,7 @@ import MuiAccordion from "@mui/material/Accordion";
 import MuiAccordionSummary from "@mui/material/AccordionSummary";
 import MuiAccordionDetails from "@mui/material/AccordionDetails";
 import OutputField from "./OutputField";
+import InputField from "./InputField";
 
 const Accordion = styled((props) => (
   <MuiAccordion disableGutters elevation={0} square {...props} />
@@ -43,7 +44,7 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
 }));
 
 export default function RecordEdit(params) {
-  const { data, metadata } = params;
+  const { data, metadata, mode } = params;
   const [expanded, setExpanded] = React.useState("panel1");
 
   const handleChange = (panel) => (event, newExpanded) => {
@@ -62,18 +63,26 @@ export default function RecordEdit(params) {
         <Box>
           <Grid container rowSpacing={3} columnSpacing={10}>
             {metadata.fields.map((field, index) => {
-              return (
-                <Grid
-                  xs={12}
-                  sm={12 / metadata.numColumns}
-                  key={field.name + "_" + index}
-                >
-                  <OutputField
-                    data={data[field.name]}
-                    metadata={{ type: field.type, label: field.label }}
-                  />
-                </Grid>
-              );
+              if (mode === "view")
+                return (
+                  <Grid
+                    xs={12}
+                    sm={12 / metadata.numColumns}
+                    key={field.name + "_" + index}
+                  >
+                    <OutputField data={data[field.name]} metadata={field} />
+                  </Grid>
+                );
+              else
+                return (
+                  <Grid
+                    xs={12}
+                    sm={12 / metadata.numColumns}
+                    key={field.name + "_" + index}
+                  >
+                    <InputField data={data[field.name]} metadata={field} />
+                  </Grid>
+                );
             })}
           </Grid>
         </Box>

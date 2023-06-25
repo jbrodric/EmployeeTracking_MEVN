@@ -1,5 +1,6 @@
 import { Form, useLoaderData, redirect, useNavigate } from "react-router-dom";
 import backend from "../api/backend.js";
+import RecordEdit from "./RecordEdit.js";
 
 export async function action({ request, params }) {
   const jobListAPI = new backend.JobListAPI(backend.API_BASE_URL);
@@ -17,25 +18,12 @@ export async function action({ request, params }) {
 }
 
 export default function EditContact() {
-  const { job } = useLoaderData();
+  const recordData = useLoaderData();
   const navigate = useNavigate();
 
   return (
     <Form method="post" id="job-form">
-      <label>
-        <span>Title</span>
-        <input
-          placeholder="Title"
-          aria-label="Title"
-          type="text"
-          name="title"
-          defaultValue={job.title}
-        />
-      </label>
-      <label>
-        <span>Description</span>
-        <textarea name="description" defaultValue={job.description} rows={6} />
-      </label>
+      <RecordEdit recordData={recordData} mode="edit" />
       <p>
         <button type="submit">Save</button>
         <button

@@ -16,11 +16,7 @@ export async function loader({ params }) {
     }
   } else job = backend.JobListAPI.createJob("", "");
 
-  return { job };
-}
-
-export default function Job() {
-  const data = new RecordData(useLoaderData().job, {
+  return new RecordData(job, {
     sections: [
       {
         title: "Information",
@@ -33,13 +29,17 @@ export default function Job() {
           },
           {
             name: "description",
-            type: "text",
+            type: "textarea",
             label: "Description",
           },
         ],
       },
     ],
   });
+}
+
+export default function Job() {
+  const recordData = useLoaderData();
 
   return (
     <div id="job">
@@ -65,23 +65,7 @@ export default function Job() {
           </Form>
         </div>
       </div>
-      <RecordEdit recordData={data} />
+      <RecordEdit recordData={recordData} mode="view" />
     </div>
   );
 }
-
-// function Favorite({ contact }) {
-//   // yes, this is a `let` for later
-//   let favorite = contact.favorite;
-//   return (
-//     <Form method="post">
-//       <button
-//         name="favorite"
-//         value={favorite ? "false" : "true"}
-//         aria-label={favorite ? "Remove from favorites" : "Add to favorites"}
-//       >
-//         {favorite ? "★" : "☆"}
-//       </button>
-//     </Form>
-//   );
-// }

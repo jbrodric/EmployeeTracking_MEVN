@@ -10,7 +10,7 @@ class RecordData {
 }
 
 export default function RecordEdit(params) {
-  const { recordData } = params;
+  const { recordData, mode } = params;
 
   return (
     <Box>
@@ -20,6 +20,7 @@ export default function RecordEdit(params) {
             key={section.title + "_" + index}
             data={recordData.data}
             metadata={section}
+            mode={mode}
           />
         );
       })}

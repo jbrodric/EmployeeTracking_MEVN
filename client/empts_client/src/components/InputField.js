@@ -1,19 +1,42 @@
+import { TextField, Box } from "@mui/material";
 import React from "react";
 
-export default function InputField(params) {
-  return (
-    <div>
-      <h2>About</h2>
-      <p>
-        <i>Employee Tracking System is powered by:</i>
-      </p>
-      <ul>
-        <li>MongoDB</li>
-        <li>Express.js</li>
-        <li>React</li>
-        <li>Node.js</li>
-        <li>Material UI</li>
-      </ul>
-    </div>
-  );
+export default function InputField(props) {
+  const { metadata, data } = props;
+  let ret;
+
+  switch (metadata.type) {
+    case "textarea":
+      ret = (
+        <Box sx={{ height: "100%", position: "relative" }}>
+          <TextField
+            id={metadata.name}
+            label={metadata.label}
+            variant="outlined"
+            name={metadata.name}
+            defaultValue={data}
+            multiline
+            rows={6}
+            fullWidth
+          />
+        </Box>
+      );
+      break;
+    case "text":
+    default:
+      ret = (
+        <Box sx={{ height: "100%", position: "relative" }}>
+          <TextField
+            id={metadata.name}
+            label={metadata.label}
+            variant="outlined"
+            name={metadata.name}
+            defaultValue={data}
+            fullWidth
+          />
+        </Box>
+      );
+  }
+
+  return ret;
 }

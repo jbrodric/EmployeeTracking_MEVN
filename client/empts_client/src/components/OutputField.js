@@ -6,8 +6,8 @@ export default function OutputField(props) {
   let ret;
 
   switch (metadata.type) {
-    case "text":
     case "textarea":
+    case "text":
     default:
       ret = (
         <Box sx={{ height: "100%", position: "relative" }}>
