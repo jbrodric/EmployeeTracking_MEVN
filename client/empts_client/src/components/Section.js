@@ -48,7 +48,7 @@ export default function RecordEdit(params) {
   const [expanded, setExpanded] = React.useState("panel1");
 
   const handleChange = (panel) => (event, newExpanded) => {
-    setExpanded(newExpanded ? panel : false);
+    if (mode === "view") setExpanded(newExpanded ? panel : false);
   };
 
   return (
