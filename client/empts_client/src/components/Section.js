@@ -63,7 +63,11 @@ export default function RecordEdit(params) {
           <Grid container rowSpacing={3} columnSpacing={10}>
             {metadata.fields.map((field, index) => {
               return (
-                <Grid xs={12} sm={6} key={field.name + "_" + index}>
+                <Grid
+                  xs={12}
+                  sm={12 / metadata.numColumns}
+                  key={field.name + "_" + index}
+                >
                   <OutputField
                     data={data[field.name]}
                     metadata={{ type: field.type, label: field.label }}

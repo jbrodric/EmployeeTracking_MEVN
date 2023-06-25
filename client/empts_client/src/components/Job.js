@@ -24,6 +24,7 @@ export default function Job() {
     sections: [
       {
         title: "Information",
+        numColumns: 2,
         fields: [
           {
             name: "title",
