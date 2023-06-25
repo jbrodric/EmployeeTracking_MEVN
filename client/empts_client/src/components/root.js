@@ -4,7 +4,6 @@ import Grid from "@mui/material/Unstable_Grid2";
 import * as React from "react";
 import { styled, useTheme } from "@mui/material/styles";
 import Drawer from "@mui/material/Drawer";
-import { BottomNavigation } from "@mui/material";
 import MuiAppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -215,7 +214,7 @@ export default function Root() {
             <Grid xs={12} id="outlet">
               <Paper
                 variant="elevation"
-                elevation="8"
+                elevation={8}
                 sx={{
                   marginTop: "100px",
                   marginLeft: "10%",
@@ -232,11 +231,11 @@ export default function Root() {
               </Paper>
             </Grid>
             <Grid xs={12}>
-              <BottomNavigation id="footer">
-                <p>
+              <Box id="footer">
+                <Typography variant="body1" component="div">
                   <i>Employee Tracking System ©2023</i>
-                </p>
-              </BottomNavigation>
+                </Typography>
+              </Box>
             </Grid>
           </Grid>
         </Main>

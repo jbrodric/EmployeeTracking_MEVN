@@ -7,7 +7,9 @@
 }
 
 #footer {
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   height: 100px;
   background: #515052;
   color: white;

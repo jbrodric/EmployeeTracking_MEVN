@@ -1,5 +1,6 @@
 import { Form, useLoaderData } from "react-router-dom";
 import backend from "../api/backend.js";
+import RecordEdit, { RecordData } from "./RecordEdit.js";
 
 export async function loader({ params }) {
   const jobListAPI = new backend.JobListAPI(backend.API_BASE_URL);
@@ -19,15 +20,29 @@ export async function loader({ params }) {
 }
 
 export default function Job() {
-  const { job } = useLoaderData();
+  const data = new RecordData(useLoaderData().job, {
+    sections: [
+      {
+        title: "Information",
+        fields: [
+          {
+            name: "title",
+            type: "text",
+            label: "Title",
+          },
+          {
+            name: "description",
+            type: "text",
+            label: "Description",
+          },
+        ],
+      },
+    ],
+  });
 
   return (
     <div id="job">
       <div>
-        <h1>{job.title}</h1>
-
-        {<p>{job.description}</p>}
-
         <div>
           <Form action="edit">
             <button type="submit">Edit</button>
@@ -49,6 +64,7 @@ export default function Job() {
           </Form>
         </div>
       </div>
+      <RecordEdit recordData={data} />
     </div>
   );
 }
