@@ -5,6 +5,8 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import WorkIcon from "@mui/icons-material/Work";
 import Grid from "@mui/material/Unstable_Grid2";
+import { useNavigate } from "react-router-dom";
+import ArrowLeftIcon from "@mui/icons-material/ArrowLeft";
 
 const HeaderPaper = styled((props) => (
   <Paper
@@ -24,6 +26,7 @@ const HeaderPaper = styled((props) => (
 
 export default function RecordHeader(props) {
   const { recordName, objectName } = props;
+  const navigate = useNavigate();
 
   return (
     <HeaderPaper variant="elevation" elevation={8}>
@@ -60,7 +63,7 @@ export default function RecordHeader(props) {
                   width="600px"
                   sx={{ fontWeight: "bold", margin: "0px" }}
                 >
-                  {recordName}
+                  {recordName ? recordName : "Uknown Record"}
                 </Typography>
               </Grid>
             </Grid>
@@ -104,6 +107,17 @@ export default function RecordHeader(props) {
                   Delete
                 </Button>
               </Form>
+              <Button
+                variant="outlined"
+                type="button"
+                sx={{ margin: "10px", backgroundColor: "white" }}
+                onClick={() => {
+                  navigate(-1);
+                }}
+                startIcon={<ArrowLeftIcon />}
+              >
+                Back
+              </Button>
             </Grid>
           </Grid>
         </Box>

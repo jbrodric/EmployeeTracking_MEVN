@@ -52,7 +52,7 @@ export default function Job() {
   return (
     <>
       <RecordHeader
-        recordName={recordData.data.title}
+        recordName={recordData.data.name}
         objectName={recordData.metadata.objectName}
       />
       <Paper variant="elevation" elevation={8} className="page">
