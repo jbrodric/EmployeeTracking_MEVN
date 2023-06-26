@@ -3,6 +3,7 @@ import backend from "../api/backend.js";
 import RecordEdit, { RecordData } from "./RecordEdit.js";
 import { Paper } from "@mui/material";
 import RecordHeader from "./RecordHeader.js";
+import WorkIcon from "@mui/icons-material/Work";
 
 export async function loader({ params }) {
   const jobListAPI = new backend.JobListAPI(backend.API_BASE_URL);
@@ -46,6 +47,22 @@ export async function loader({ params }) {
   });
 }
 
+function getIcon() {
+  return (
+    <>
+      <WorkIcon
+        fontSize="large"
+        sx={{
+          color: "rgb(255,255,255)",
+          backgroundColor: "rgb(25, 118, 210)",
+          borderRadius: "5px",
+          padding: "6px",
+        }}
+      />
+    </>
+  );
+}
+
 export default function Job() {
   const recordData = useLoaderData();
 
@@ -54,6 +71,7 @@ export default function Job() {
       <RecordHeader
         recordName={recordData.data.name}
         objectName={recordData.metadata.objectName}
+        icon={getIcon()}
       />
       <Paper variant="elevation" elevation={8} className="page">
         <RecordEdit recordData={recordData} mode="view" />

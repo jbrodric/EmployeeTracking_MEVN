@@ -3,7 +3,6 @@ import { Paper, Button, Typography, Box } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
-import WorkIcon from "@mui/icons-material/Work";
 import Grid from "@mui/material/Unstable_Grid2";
 import { useNavigate } from "react-router-dom";
 import ArrowLeftIcon from "@mui/icons-material/ArrowLeft";
@@ -25,7 +24,7 @@ const HeaderPaper = styled((props) => (
 }));
 
 export default function RecordHeader(props) {
-  const { recordName, objectName } = props;
+  const { recordName, objectName, icon } = props;
   const navigate = useNavigate();
 
   return (
@@ -39,15 +38,7 @@ export default function RecordHeader(props) {
           className="center-content"
           sx={{ flex: "0 1 auto", marginRight: "10px" }}
         >
-          <WorkIcon
-            fontSize="large"
-            sx={{
-              color: "rgb(255,255,255)",
-              backgroundColor: "rgb(25, 118, 210)",
-              borderRadius: "5px",
-              padding: "6px",
-            }}
-          />
+          {icon}
         </Box>
         <Box id="header-grid" sx={{ flex: "1 1 auto" }}>
           <Grid container rowSpacing={0} columnSpacing={0}>
