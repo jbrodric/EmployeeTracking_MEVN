@@ -1,4 +1,4 @@
-import { Form } from "react-router-dom";
+import { Form, Link } from "react-router-dom";
 import { Paper, Button, Typography, Box } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import EditIcon from "@mui/icons-material/Edit";
@@ -22,83 +22,92 @@ const HeaderPaper = styled((props) => (
   borderRadius: "5px",
 }));
 
-let navigate;
-const ButtonMap = {
-  Edit: (
-    <>
-      <Form action="edit">
-        <Button
-          variant="outlined"
-          type="submit"
-          sx={{ margin: "10px", backgroundColor: "white" }}
-          startIcon={<EditIcon />}
-        >
-          Edit
-        </Button>
-      </Form>
-    </>
-  ),
-  Delete: (
-    <>
-      <Form
-        method="post"
-        action="destroy"
-        onSubmit={(event) => {
-          if (
-            !window.confirm("Please confirm you want to delete this record.")
-          ) {
-            event.preventDefault();
-          }
-        }}
-      >
-        <Button
-          variant="outlined"
-          type="submit"
-          sx={{ margin: "10px", backgroundColor: "white" }}
-          startIcon={<DeleteIcon />}
-        >
-          Delete
-        </Button>
-      </Form>
-    </>
-  ),
-  Cancel: (
-    <>
-      <Form>
-        <Button
-          variant="outlined"
-          type="button"
-          sx={{ margin: "10px", backgroundColor: "white" }}
-          onClick={() => {
-            navigate(-1);
-          }}
-        >
-          Cancel
-        </Button>
-      </Form>
-    </>
-  ),
-  Back: (
-    <>
-      <Form>
-        <Button
-          variant="outlined"
-          type="button"
-          sx={{ margin: "10px", backgroundColor: "white" }}
-          onClick={() => {
-            navigate(-1);
-          }}
-        >
-          Back
-        </Button>
-      </Form>
-    </>
-  ),
-};
-
 export default function RecordHeader(props) {
-  const { recordName, objectName, icon, buttons } = props;
-  navigate = useNavigate();
+  const { recordName, objectName, icon, buttons, backURL } = props;
+  const navigate = useNavigate();
+  const ButtonMap = {
+    Edit: (
+      <>
+        <Form action="edit">
+          <Button
+            variant="outlined"
+            type="submit"
+            sx={{ margin: "10px", backgroundColor: "white" }}
+            startIcon={<EditIcon />}
+          >
+            Edit
+          </Button>
+        </Form>
+      </>
+    ),
+    Delete: (
+      <>
+        <Form
+          method="post"
+          action="destroy"
+          onSubmit={(event) => {
+            if (
+              !window.confirm("Please confirm you want to delete this record.")
+            ) {
+              event.preventDefault();
+            }
+          }}
+        >
+          <Button
+            variant="outlined"
+            type="submit"
+            sx={{ margin: "10px", backgroundColor: "white" }}
+            startIcon={<DeleteIcon />}
+          >
+            Delete
+          </Button>
+        </Form>
+      </>
+    ),
+    Cancel: (
+      <>
+        <Form>
+          <Button
+            variant="outlined"
+            type="button"
+            sx={{ margin: "10px", backgroundColor: "white" }}
+            onClick={() => {
+              navigate(-1);
+            }}
+          >
+            Cancel
+          </Button>
+        </Form>
+      </>
+    ),
+    Back: (
+      <>
+        <Form>
+          <Link to={backURL}>
+            <Button
+              variant="outlined"
+              type="button"
+              sx={{ margin: "10px", backgroundColor: "white" }}
+            >
+              Back
+            </Button>
+          </Link>
+        </Form>
+      </>
+    ),
+    Save: (
+      <>
+        <Button
+          variant="outlined"
+          type="submit"
+          sx={{ margin: "10px", backgroundColor: "white" }}
+        >
+          Save
+        </Button>
+      </>
+    ),
+  };
+
   return (
     <HeaderPaper variant="elevation" elevation={8}>
       <Box

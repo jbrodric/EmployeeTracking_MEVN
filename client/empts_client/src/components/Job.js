@@ -47,7 +47,7 @@ export async function loader({ params }) {
   });
 }
 
-function getIcon() {
+export function getIcon() {
   return (
     <>
       <WorkIcon
@@ -73,6 +73,7 @@ export default function Job() {
         objectName={recordData.metadata.objectName}
         icon={getIcon()}
         buttons={["Edit", "Delete", "Back"]}
+        backURL="/Jobs"
       />
       <Paper variant="elevation" elevation={8} className="page">
         <RecordEdit recordData={recordData} mode="view" />
