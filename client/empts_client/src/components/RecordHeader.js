@@ -22,7 +22,9 @@ const HeaderPaper = styled((props) => (
   borderRadius: "5px",
 }));
 
-export default function RecordHeader() {
+export default function RecordHeader(props) {
+  const { recordName, objectName } = props;
+
   return (
     <HeaderPaper variant="elevation" elevation={8}>
       <Box
@@ -48,7 +50,7 @@ export default function RecordHeader() {
           <Grid container rowSpacing={0} columnSpacing={0}>
             <Grid container xs={9}>
               <Grid xs={12}>
-                <Typography sx={{ margin: "0px" }}>Job</Typography>
+                <Typography sx={{ margin: "0px" }}>{objectName}</Typography>
               </Grid>
               <Grid xs={12}>
                 <Typography
@@ -58,7 +60,7 @@ export default function RecordHeader() {
                   width="600px"
                   sx={{ fontWeight: "bold", margin: "0px" }}
                 >
-                  Test JobTest JobTest JobTest JobTest JobTest JobTest Job
+                  {recordName}
                 </Typography>
               </Grid>
             </Grid>

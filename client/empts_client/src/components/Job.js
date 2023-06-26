@@ -19,6 +19,7 @@ export async function loader({ params }) {
   } else job = backend.JobListAPI.createJob("", "");
 
   return new RecordData(job, {
+    objectName: "Job",
     sections: [
       {
         title: "Information",
@@ -65,7 +66,10 @@ export default function Job() {
 
   return (
     <>
-      <RecordHeader />
+      <RecordHeader
+        recordName={recordData.data.title}
+        objectName={recordData.metadata.objectName}
+      />
       <Paper variant="elevation" elevation={8} className="page">
         <RecordEdit recordData={recordData} mode="view" />
       </Paper>
