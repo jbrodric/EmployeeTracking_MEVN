@@ -75,7 +75,7 @@ export default function Job() {
         buttons={["Edit", "Delete", "Back"]}
         backURL="/Jobs"
       />
-      <Paper variant="elevation" elevation={8} className="page">
+      <Paper variant="elevation" elevation={8} className="record-page">
         <RecordEdit recordData={recordData} mode="view" />
       </Paper>
     </>

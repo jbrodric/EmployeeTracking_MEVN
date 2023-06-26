@@ -31,7 +31,7 @@ export default function EditContact() {
         icon={getIcon()}
         buttons={["Save", "Cancel"]}
       />
-      <Paper variant="elevation" elevation={8} className="page">
+      <Paper variant="elevation" elevation={8} className="record-page">
         <RecordEdit recordData={recordData} mode="edit" />
       </Paper>
     </Form>
