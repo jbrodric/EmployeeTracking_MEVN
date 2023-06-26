@@ -1,7 +1,8 @@
-import { Form, useLoaderData } from "react-router-dom";
+import { useLoaderData } from "react-router-dom";
 import backend from "../api/backend.js";
 import RecordEdit, { RecordData } from "./RecordEdit.js";
 import { Paper } from "@mui/material";
+import RecordHeader from "./RecordHeader.js";
 
 export async function loader({ params }) {
   const jobListAPI = new backend.JobListAPI(backend.API_BASE_URL);
@@ -33,6 +34,134 @@ export async function loader({ params }) {
             type: "textarea",
             label: "Description",
           },
+          {
+            name: "title",
+            type: "text",
+            label: "Title",
+          },
+          {
+            name: "description",
+            type: "textarea",
+            label: "Description",
+          },
+          {
+            name: "title",
+            type: "text",
+            label: "Title",
+          },
+          {
+            name: "description",
+            type: "textarea",
+            label: "Description",
+          },
+        ],
+      },
+      {
+        title: "Information",
+        numColumns: 2,
+        fields: [
+          {
+            name: "title",
+            type: "text",
+            label: "Title",
+          },
+          {
+            name: "description",
+            type: "textarea",
+            label: "Description",
+          },
+          {
+            name: "title",
+            type: "text",
+            label: "Title",
+          },
+          {
+            name: "description",
+            type: "textarea",
+            label: "Description",
+          },
+          {
+            name: "title",
+            type: "text",
+            label: "Title",
+          },
+          {
+            name: "description",
+            type: "textarea",
+            label: "Description",
+          },
+        ],
+      },
+      {
+        title: "Information",
+        numColumns: 2,
+        fields: [
+          {
+            name: "title",
+            type: "text",
+            label: "Title",
+          },
+          {
+            name: "description",
+            type: "textarea",
+            label: "Description",
+          },
+          {
+            name: "title",
+            type: "text",
+            label: "Title",
+          },
+          {
+            name: "description",
+            type: "textarea",
+            label: "Description",
+          },
+          {
+            name: "title",
+            type: "text",
+            label: "Title",
+          },
+          {
+            name: "description",
+            type: "textarea",
+            label: "Description",
+          },
+        ],
+      },
+      {
+        title: "Information",
+        numColumns: 2,
+        fields: [
+          {
+            name: "title",
+            type: "text",
+            label: "Title",
+          },
+          {
+            name: "description",
+            type: "textarea",
+            label: "Description",
+          },
+          {
+            name: "title",
+            type: "text",
+            label: "Title",
+          },
+          {
+            name: "description",
+            type: "textarea",
+            label: "Description",
+          },
+          {
+            name: "title",
+            type: "text",
+            label: "Title",
+          },
+          {
+            name: "description",
+            type: "textarea",
+            label: "Description",
+          },
         ],
       },
     ],
@@ -43,32 +172,11 @@ export default function Job() {
   const recordData = useLoaderData();
 
   return (
-    <Paper variant="elevation" elevation={8} className="page">
-      <div id="job">
-        <div>
-          <div>
-            <Form action="edit">
-              <button type="submit">Edit</button>
-            </Form>
-            <Form
-              method="post"
-              action="destroy"
-              onSubmit={(event) => {
-                if (
-                  !window.confirm(
-                    "Please confirm you want to delete this record."
-                  )
-                ) {
-                  event.preventDefault();
-                }
-              }}
-            >
-              <button type="submit">Delete</button>
-            </Form>
-          </div>
-        </div>
+    <>
+      <RecordHeader />
+      <Paper variant="elevation" elevation={8} className="page">
         <RecordEdit recordData={recordData} mode="view" />
-      </div>
-    </Paper>
+      </Paper>
+    </>
   );
 }

@@ -1,6 +1,5 @@
 import { Outlet, useNavigation, NavLink } from "react-router-dom";
 import Box from "@mui/material/Box";
-import Grid from "@mui/material/Unstable_Grid2";
 import * as React from "react";
 import { styled, useTheme } from "@mui/material/styles";
 import Drawer from "@mui/material/Drawer";
@@ -103,7 +102,8 @@ export default function Root() {
         sx={{
           display: "flex",
           width: "100%",
-          backgroundColor: "rgb(231, 235, 240)",
+          backgroundColor: "#E7EBF0",
+          minHeight: "900px;",
         }}
       >
         <CssBaseline />
@@ -209,20 +209,14 @@ export default function Root() {
           open={open}
           className={navigation.state === "loading" ? "loading" : ""}
         >
-          <Grid container spacing={0}>
-            <Grid xs={12} id="outlet">
-              <DrawerHeader />
-              <Outlet />
-            </Grid>
-            <Grid xs={12}>
-              <Box id="footer">
-                <Typography variant="body1" component="div">
-                  <i>Employee Tracking System ©2023</i>
-                </Typography>
-              </Box>
-            </Grid>
-          </Grid>
+          <DrawerHeader />
+          <Outlet />
         </Main>
+      </Box>
+      <Box id="footer">
+        <Typography variant="body1" component="div">
+          <i>Employee Tracking System ©2023</i>
+        </Typography>
       </Box>
     </>
   );
