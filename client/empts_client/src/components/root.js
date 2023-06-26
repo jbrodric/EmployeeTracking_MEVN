@@ -99,124 +99,128 @@ export default function Root() {
   return (
     <>
       <Box
+        id="app-container"
         sx={{
           display: "flex",
-          width: "100%",
-          backgroundColor: "#E7EBF0",
-          minHeight: "900px;",
+          flexFlow: "column",
+          height: "100%",
         }}
       >
-        <CssBaseline />
-        <AppBar position="fixed" open={open}>
-          <Toolbar>
-            <IconButton
-              color="inherit"
-              aria-label="open drawer"
-              edge="end"
-              onClick={handleDrawerOpen}
-              sx={{ mr: 2, ...(open && { display: "none" }) }}
-            >
-              <MenuIcon />
-            </IconButton>
-            <Typography variant="h6" noWrap component="div">
-              Employee Tracking System
-            </Typography>
-          </Toolbar>
-        </AppBar>
-        <Drawer
-          sx={{
-            width: drawerWidth,
-            flexShrink: 0,
-            "& .MuiDrawer-paper": {
-              width: drawerWidth,
-              boxSizing: "border-box",
-            },
-          }}
-          variant="persistent"
-          anchor="left"
-          open={open}
-          id="sidebar"
-        >
-          <DrawerHeader>
-            <IconButton onClick={handleDrawerClose}>
-              {theme.direction === "ltr" ? (
-                <ChevronLeftIcon />
-              ) : (
-                <ChevronRightIcon />
-              )}
-            </IconButton>
-          </DrawerHeader>
-          <Divider />
-          <List>
-            <ListItem key={"Home"} disablePadding>
-              <ListItemButton component={NavLink} to={`/`}>
-                <ListItemIcon>
-                  <HomeIcon />
-                </ListItemIcon>
-                <ListItemText primary={"Home"} />
-              </ListItemButton>
-            </ListItem>
-            <ListItem key={"Jobs"} disablePadding>
-              <ListItemButton component={NavLink} to={`/Jobs`}>
-                <ListItemIcon>
-                  <WorkIcon />
-                </ListItemIcon>
-                <ListItemText primary={"Jobs"} />
-              </ListItemButton>
-            </ListItem>
-            <ListItem key={"Applications"} disablePadding>
-              <ListItemButton component={NavLink} to={`/Applications`}>
-                <ListItemIcon>
-                  <DriveFileRenameOutlineIcon />
-                </ListItemIcon>
-                <ListItemText primary={"Applications"} />
-              </ListItemButton>
-            </ListItem>
-            <ListItem key={"Candidates"} disablePadding>
-              <ListItemButton component={NavLink} to={`/Candidates`}>
-                <ListItemIcon>
-                  <GroupIcon />
-                </ListItemIcon>
-                <ListItemText primary={"Candidates"} />
-              </ListItemButton>
-            </ListItem>
-            <Divider />
-            <ListItem key={"About"} disablePadding>
-              <ListItemButton component={NavLink} to={`/About`}>
-                <ListItemIcon>
-                  <InfoIcon />
-                </ListItemIcon>
-                <ListItemText primary={"About"} />
-              </ListItemButton>
-            </ListItem>
-          </List>
-          <DrawerFooter>
-            <Typography
-              align="center"
-              variant="subtitle1"
-              noWrap
-              component="div"
+        <Box id="content" sx={{ backgroundColor: "#E7EBF0", flex: "1 1 auto" }}>
+          <Box sx={{ display: "flex" }}>
+            <CssBaseline />
+            <AppBar position="fixed" open={open}>
+              <Toolbar>
+                <IconButton
+                  color="inherit"
+                  aria-label="open drawer"
+                  edge="end"
+                  onClick={handleDrawerOpen}
+                  sx={{ mr: 2, ...(open && { display: "none" }) }}
+                >
+                  <MenuIcon />
+                </IconButton>
+                <Typography variant="h6" noWrap component="div">
+                  Employee Tracking System
+                </Typography>
+              </Toolbar>
+            </AppBar>
+            <Drawer
               sx={{
-                fontWeight: "bold",
+                width: drawerWidth,
+                flexShrink: 0,
+                "& .MuiDrawer-paper": {
+                  width: drawerWidth,
+                  boxSizing: "border-box",
+                },
               }}
+              variant="persistent"
+              anchor="left"
+              open={open}
+              id="sidebar"
             >
-              Employee Tracking System
-            </Typography>
-          </DrawerFooter>
-        </Drawer>
-        <Main
-          id="main"
-          open={open}
-          className={navigation.state === "loading" ? "loading" : ""}
-        >
-          <DrawerHeader />
-          <Outlet />
-        </Main>
-      </Box>
-      <Box id="footer" className="center-content" sx={{ height: "100px" }}>
-        <Typography variant="body1" component="div">
-          <i>Employee Tracking System ©2023</i>
-        </Typography>
+              <DrawerHeader>
+                <IconButton onClick={handleDrawerClose}>
+                  {theme.direction === "ltr" ? (
+                    <ChevronLeftIcon />
+                  ) : (
+                    <ChevronRightIcon />
+                  )}
+                </IconButton>
+              </DrawerHeader>
+              <Divider />
+              <List>
+                <ListItem key={"Home"} disablePadding>
+                  <ListItemButton component={NavLink} to={`/`}>
+                    <ListItemIcon>
+                      <HomeIcon />
+                    </ListItemIcon>
+                    <ListItemText primary={"Home"} />
+                  </ListItemButton>
+                </ListItem>
+                <ListItem key={"Jobs"} disablePadding>
+                  <ListItemButton component={NavLink} to={`/Jobs`}>
+                    <ListItemIcon>
+                      <WorkIcon />
+                    </ListItemIcon>
+                    <ListItemText primary={"Jobs"} />
+                  </ListItemButton>
+                </ListItem>
+                <ListItem key={"Applications"} disablePadding>
+                  <ListItemButton component={NavLink} to={`/Applications`}>
+                    <ListItemIcon>
+                      <DriveFileRenameOutlineIcon />
+                    </ListItemIcon>
+                    <ListItemText primary={"Applications"} />
+                  </ListItemButton>
+                </ListItem>
+                <ListItem key={"Candidates"} disablePadding>
+                  <ListItemButton component={NavLink} to={`/Candidates`}>
+                    <ListItemIcon>
+                      <GroupIcon />
+                    </ListItemIcon>
+                    <ListItemText primary={"Candidates"} />
+                  </ListItemButton>
+                </ListItem>
+                <Divider />
+                <ListItem key={"About"} disablePadding>
+                  <ListItemButton component={NavLink} to={`/About`}>
+                    <ListItemIcon>
+                      <InfoIcon />
+                    </ListItemIcon>
+                    <ListItemText primary={"About"} />
+                  </ListItemButton>
+                </ListItem>
+              </List>
+              <DrawerFooter>
+                <Typography
+                  align="center"
+                  variant="subtitle1"
+                  noWrap
+                  component="div"
+                  sx={{
+                    fontWeight: "bold",
+                  }}
+                >
+                  Employee Tracking System
+                </Typography>
+              </DrawerFooter>
+            </Drawer>
+            <Main
+              id="main"
+              open={open}
+              className={navigation.state === "loading" ? "loading" : ""}
+            >
+              <DrawerHeader />
+              <Outlet />
+            </Main>
+          </Box>
+        </Box>
+        <Box id="footer" className="center-content" sx={{ flex: "0 0 100px" }}>
+          <Typography variant="body1" component="div">
+            <i>Employee Tracking System ©2023</i>
+          </Typography>
+        </Box>
       </Box>
     </>
   );
