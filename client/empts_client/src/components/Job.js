@@ -72,6 +72,7 @@ export default function Job() {
         recordName={recordData.data.name}
         objectName={recordData.metadata.objectName}
         icon={getIcon()}
+        buttons={["Edit", "Delete", "Back"]}
       />
       <Paper variant="elevation" elevation={8} className="page">
         <RecordEdit recordData={recordData} mode="view" />

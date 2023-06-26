@@ -5,7 +5,6 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Grid from "@mui/material/Unstable_Grid2";
 import { useNavigate } from "react-router-dom";
-import ArrowLeftIcon from "@mui/icons-material/ArrowLeft";
 
 const HeaderPaper = styled((props) => (
   <Paper
@@ -23,10 +22,83 @@ const HeaderPaper = styled((props) => (
   borderRadius: "5px",
 }));
 
-export default function RecordHeader(props) {
-  const { recordName, objectName, icon } = props;
-  const navigate = useNavigate();
+let navigate;
+const ButtonMap = {
+  Edit: (
+    <>
+      <Form action="edit">
+        <Button
+          variant="outlined"
+          type="submit"
+          sx={{ margin: "10px", backgroundColor: "white" }}
+          startIcon={<EditIcon />}
+        >
+          Edit
+        </Button>
+      </Form>
+    </>
+  ),
+  Delete: (
+    <>
+      <Form
+        method="post"
+        action="destroy"
+        onSubmit={(event) => {
+          if (
+            !window.confirm("Please confirm you want to delete this record.")
+          ) {
+            event.preventDefault();
+          }
+        }}
+      >
+        <Button
+          variant="outlined"
+          type="submit"
+          sx={{ margin: "10px", backgroundColor: "white" }}
+          startIcon={<DeleteIcon />}
+        >
+          Delete
+        </Button>
+      </Form>
+    </>
+  ),
+  Cancel: (
+    <>
+      <Form>
+        <Button
+          variant="outlined"
+          type="button"
+          sx={{ margin: "10px", backgroundColor: "white" }}
+          onClick={() => {
+            navigate(-1);
+          }}
+        >
+          Cancel
+        </Button>
+      </Form>
+    </>
+  ),
+  Back: (
+    <>
+      <Form>
+        <Button
+          variant="outlined"
+          type="button"
+          sx={{ margin: "10px", backgroundColor: "white" }}
+          onClick={() => {
+            navigate(-1);
+          }}
+        >
+          Back
+        </Button>
+      </Form>
+    </>
+  ),
+};
 
+export default function RecordHeader(props) {
+  const { recordName, objectName, icon, buttons } = props;
+  navigate = useNavigate();
   return (
     <HeaderPaper variant="elevation" elevation={8}>
       <Box
@@ -42,7 +114,7 @@ export default function RecordHeader(props) {
         </Box>
         <Box id="header-grid" sx={{ flex: "1 1 auto" }}>
           <Grid container rowSpacing={0} columnSpacing={0}>
-            <Grid container xs={9}>
+            <Grid container xs={6}>
               <Grid xs={12}>
                 <Typography sx={{ margin: "0px" }}>{objectName}</Typography>
               </Grid>
@@ -59,56 +131,16 @@ export default function RecordHeader(props) {
               </Grid>
             </Grid>
             <Grid
-              xs={3}
+              xs={6}
               sx={{
                 display: "flex",
                 justifyContent: "right",
                 alignItems: "center",
               }}
             >
-              <Form action="edit">
-                <Button
-                  variant="outlined"
-                  type="submit"
-                  sx={{ margin: "10px", backgroundColor: "white" }}
-                  startIcon={<EditIcon />}
-                >
-                  Edit
-                </Button>
-              </Form>
-              <Form
-                method="post"
-                action="destroy"
-                onSubmit={(event) => {
-                  if (
-                    !window.confirm(
-                      "Please confirm you want to delete this record."
-                    )
-                  ) {
-                    event.preventDefault();
-                  }
-                }}
-              >
-                <Button
-                  variant="outlined"
-                  type="submit"
-                  sx={{ margin: "10px", backgroundColor: "white" }}
-                  startIcon={<DeleteIcon />}
-                >
-                  Delete
-                </Button>
-              </Form>
-              <Button
-                variant="outlined"
-                type="button"
-                sx={{ margin: "10px", backgroundColor: "white" }}
-                onClick={() => {
-                  navigate(-1);
-                }}
-                startIcon={<ArrowLeftIcon />}
-              >
-                Back
-              </Button>
+              {buttons.map((button, index) => {
+                return ButtonMap[button];
+              })}
             </Grid>
           </Grid>
         </Box>
