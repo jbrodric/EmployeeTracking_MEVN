@@ -1,6 +1,9 @@
 import { Form } from "react-router-dom";
 import { Paper, Button } from "@mui/material";
 import { styled } from "@mui/material/styles";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
+import WorkIcon from "@mui/icons-material/Work";
 
 const StyledPaper = styled((props) => (
   <Paper
@@ -24,11 +27,13 @@ const StyledPaper = styled((props) => (
 export default function RecordHeader() {
   return (
     <StyledPaper variant="elevation" elevation={8}>
+      <WorkIcon />
       <Form action="edit">
         <Button
           variant="outlined"
           type="submit"
           sx={{ margin: "10px", backgroundColor: "white" }}
+          startIcon={<EditIcon />}
         >
           Edit
         </Button>
@@ -48,6 +53,7 @@ export default function RecordHeader() {
           variant="outlined"
           type="submit"
           sx={{ margin: "10px", backgroundColor: "white" }}
+          startIcon={<DeleteIcon />}
         >
           Delete
         </Button>
