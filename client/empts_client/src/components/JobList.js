@@ -18,6 +18,13 @@ export default function JobList() {
   const { jobList } = useLoaderData();
   const data = new DataModel(jobList, [
     {
+      id: "name",
+      numeric: false,
+      type: "text",
+      disablePadding: true,
+      label: "Name",
+    },
+    {
       id: "title",
       numeric: false,
       type: "text",
@@ -37,7 +44,6 @@ export default function JobList() {
     <Paper variant="elevation" elevation={8} className="page">
       <div>
         <div>
-          <h2>Available Jobs</h2>
           <Form method="post">
             <button type="submit">New</button>
           </Form>

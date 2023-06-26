@@ -1,7 +1,8 @@
 import axios from "axios";
 
 class Job {
-  constructor(title, description) {
+  constructor(name, title, description) {
+    this.name = name;
     this.title = title;
     this.description = description;
   }
@@ -12,8 +13,8 @@ class JobListAPI {
     this.jobListEndPoint = apiBaseURL + "api/JobList/";
   }
 
-  static createJob(title, description) {
-    return new Job(title, description);
+  static createJob(name, title, description) {
+    return new Job(name, title, description);
   }
 
   async getJobDB(id) {

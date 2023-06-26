@@ -68,6 +68,8 @@ class DataModel {
       let newRow = { _datatable_id: this.autonumber(), ...row };
 
       for (let headCell of this.headCells) {
+        if (!newRow[headCell.id]) newRow[headCell.id] = "";
+
         if (
           headCell.type &&
           headCell.type === "text" &&
@@ -365,7 +367,9 @@ export default function EnhancedTable(props) {
                             key={row._datatable_id + "_" + headCell.id}
                           >
                             <Link to={recordURL + row[recordIdField]}>
-                              {row[headCell.id]}
+                              {row[headCell.id]
+                                ? row[headCell.id]
+                                : "Link to Record"}
                             </Link>
                           </TableCell>
                         );

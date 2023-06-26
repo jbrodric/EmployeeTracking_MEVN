@@ -26,24 +26,9 @@ export async function loader({ params }) {
         numColumns: 2,
         fields: [
           {
-            name: "title",
+            name: "name",
             type: "text",
-            label: "Title",
-          },
-          {
-            name: "description",
-            type: "textarea",
-            label: "Description",
-          },
-          {
-            name: "title",
-            type: "text",
-            label: "Title",
-          },
-          {
-            name: "description",
-            type: "textarea",
-            label: "Description",
+            label: "Name",
           },
           {
             name: "title",
