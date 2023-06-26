@@ -16,8 +16,9 @@ export default function InputField(props) {
             name={metadata.name}
             defaultValue={data}
             multiline
-            rows={6}
+            rows={4}
             fullWidth
+            size="small"
           />
         </Box>
       );
@@ -33,6 +34,7 @@ export default function InputField(props) {
             name={metadata.name}
             defaultValue={data}
             fullWidth
+            size="small"
           />
         </Box>
       );
