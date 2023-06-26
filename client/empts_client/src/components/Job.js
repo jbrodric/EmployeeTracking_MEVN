@@ -1,6 +1,7 @@
 import { Form, useLoaderData } from "react-router-dom";
 import backend from "../api/backend.js";
 import RecordEdit, { RecordData } from "./RecordEdit.js";
+import { Paper } from "@mui/material";
 
 export async function loader({ params }) {
   const jobListAPI = new backend.JobListAPI(backend.API_BASE_URL);
@@ -42,30 +43,32 @@ export default function Job() {
   const recordData = useLoaderData();
 
   return (
-    <div id="job">
-      <div>
+    <Paper variant="elevation" elevation={8} className="page">
+      <div id="job">
         <div>
-          <Form action="edit">
-            <button type="submit">Edit</button>
-          </Form>
-          <Form
-            method="post"
-            action="destroy"
-            onSubmit={(event) => {
-              if (
-                !window.confirm(
-                  "Please confirm you want to delete this record."
-                )
-              ) {
-                event.preventDefault();
-              }
-            }}
-          >
-            <button type="submit">Delete</button>
-          </Form>
+          <div>
+            <Form action="edit">
+              <button type="submit">Edit</button>
+            </Form>
+            <Form
+              method="post"
+              action="destroy"
+              onSubmit={(event) => {
+                if (
+                  !window.confirm(
+                    "Please confirm you want to delete this record."
+                  )
+                ) {
+                  event.preventDefault();
+                }
+              }}
+            >
+              <button type="submit">Delete</button>
+            </Form>
+          </div>
         </div>
+        <RecordEdit recordData={recordData} mode="view" />
       </div>
-      <RecordEdit recordData={recordData} mode="view" />
-    </div>
+    </Paper>
   );
 }

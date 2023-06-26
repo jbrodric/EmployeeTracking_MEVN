@@ -1,6 +1,7 @@
 import { Form, useLoaderData, redirect, useNavigate } from "react-router-dom";
 import backend from "../api/backend.js";
 import RecordEdit from "./RecordEdit.js";
+import { Paper } from "@mui/material";
 
 export async function action({ request, params }) {
   const jobListAPI = new backend.JobListAPI(backend.API_BASE_URL);
@@ -22,19 +23,21 @@ export default function EditContact() {
   const navigate = useNavigate();
 
   return (
-    <Form method="post" id="job-form">
-      <RecordEdit recordData={recordData} mode="edit" />
-      <p>
-        <button type="submit">Save</button>
-        <button
-          type="button"
-          onClick={() => {
-            navigate(-1);
-          }}
-        >
-          Cancel
-        </button>
-      </p>
-    </Form>
+    <Paper variant="elevation" elevation={8} className="page">
+      <Form method="post" id="job-form">
+        <RecordEdit recordData={recordData} mode="edit" />
+        <p>
+          <button type="submit">Save</button>
+          <button
+            type="button"
+            onClick={() => {
+              navigate(-1);
+            }}
+          >
+            Cancel
+          </button>
+        </p>
+      </Form>
+    </Paper>
   );
 }

@@ -23,7 +23,6 @@ import WorkIcon from "@mui/icons-material/Work";
 import InfoIcon from "@mui/icons-material/Info";
 import GroupIcon from "@mui/icons-material/Group";
 import DriveFileRenameOutlineIcon from "@mui/icons-material/DriveFileRenameOutline";
-import Paper from "@mui/material/Paper";
 
 const drawerWidth = 240;
 
@@ -212,23 +211,8 @@ export default function Root() {
         >
           <Grid container spacing={0}>
             <Grid xs={12} id="outlet">
-              <Paper
-                variant="elevation"
-                elevation={8}
-                sx={{
-                  marginTop: "100px",
-                  marginLeft: "10%",
-                  marginRight: "10%",
-                  marginBottom: "100px",
-                  paddingLeft: "5%",
-                  paddingRight: "5%",
-                  paddingBottom: "5%",
-                  minHeight: "900px",
-                }}
-              >
-                <DrawerHeader />
-                <Outlet />
-              </Paper>
+              <DrawerHeader />
+              <Outlet />
             </Grid>
             <Grid xs={12}>
               <Box id="footer">
