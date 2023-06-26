@@ -7,12 +7,14 @@
 }
 
 #footer {
+  background: #515052;
+  color: white;
+}
+
+.center-content {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100px;
-  background: #515052;
-  color: white;
 }
 
 #sidebar a.active {

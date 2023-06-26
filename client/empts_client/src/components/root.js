@@ -213,7 +213,7 @@ export default function Root() {
           <Outlet />
         </Main>
       </Box>
-      <Box id="footer">
+      <Box id="footer" className="center-content" sx={{ height: "100px" }}>
         <Typography variant="body1" component="div">
           <i>Employee Tracking System ©2023</i>
         </Typography>
