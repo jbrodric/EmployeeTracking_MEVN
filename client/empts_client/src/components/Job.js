@@ -4,6 +4,7 @@ import RecordEdit, { RecordData } from "./RecordEdit.js";
 import { Paper } from "@mui/material";
 import RecordHeader from "./RecordHeader.js";
 import WorkIcon from "@mui/icons-material/Work";
+import StdJobLayout from "../layouts/JobLayout.js";
 
 export async function loader({ params }) {
   const jobListAPI = new backend.JobListAPI();
@@ -19,35 +20,7 @@ export async function loader({ params }) {
     }
   } else job = backend.JobListAPI.createJob("", "");
 
-  return new RecordData(job, {
-    objectName: "Job",
-    sections: [
-      {
-        title: "Information",
-        numColumns: 2,
-        fields: [
-          {
-            name: "name",
-            type: "text",
-            label: "Name",
-            required: true,
-          },
-          {
-            name: "title",
-            type: "text",
-            label: "Title",
-            required: true,
-          },
-          {
-            name: "description",
-            type: "textarea",
-            label: "Description",
-            required: false,
-          },
-        ],
-      },
-    ],
-  });
+  return new RecordData(job, StdJobLayout());
 }
 
 export function getIcon() {
