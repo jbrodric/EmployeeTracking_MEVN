@@ -41,14 +41,11 @@ router.get(ONE_API + "/:id", async (req, res) => {
 
 router.post(ONE_API, async (req, res) => {
   const newJob = new JobPosting(req.body);
-  console.log(req.body);
-  console.log(newJob);
   try {
     const job = await newJob.save();
     if (!job) throw new Error("Something went wrong saving the job");
     res.status(200).json(job);
   } catch (error) {
-    console.log(error);
     res.status(500).json({ message: error.message });
   }
 });
