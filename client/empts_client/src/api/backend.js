@@ -6,6 +6,7 @@ function CreateAPI() {
     JOB_LIST_API: process.env.REACT_APP_MONGO_JOB_LIST_API,
     ONE_API: process.env.REACT_APP_MONGO_ONE_API,
     BULK_API: process.env.REACT_APP_MONGO_BULK_API,
+    SCHEMA_API: process.env.REACT_APP_MONGO_SCHEMA_API,
     JobListAPI: JobListAPI,
   };
 }

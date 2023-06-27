@@ -1,9 +1,21 @@
 const { Router } = require("express");
-const initJobPosting = require("../../../models/JobPosting");
+const {
+  initJobPosting,
+  getJobPostingSchema,
+} = require("../../../models/JobPosting");
 
 let JobPosting;
 const router = Router();
-const { BULK_API, ONE_API } = process.env;
+const { BULK_API, ONE_API, SCHEMA_API } = process.env;
+
+/***************** Schema API Methods *****************/
+router.get(SCHEMA_API + "/", async (req, res) => {
+  try {
+    res.status(200).json(getJobPostingSchema().obj);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
 
 /***************** Bulk API Methods *****************/
 router.get(BULK_API, async (req, res) => {

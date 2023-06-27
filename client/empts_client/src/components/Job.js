@@ -18,7 +18,7 @@ export async function loader({ params }) {
         statusText: "Not Found",
       });
     }
-  } else job = backend.JobListAPI.createJob("", "");
+  } else job = jobListAPI.getJobDBSchema();
 
   return new RecordData(job, StdJobLayout());
 }

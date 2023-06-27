@@ -1,5 +1,7 @@
-module.exports = (mongoose) => {
-  const JobPostingSchema = new mongoose.Schema({
+let JobPostingSchema;
+
+module.exports.initJobPosting = (mongoose) => {
+  JobPostingSchema = new mongoose.Schema({
     name: {
       type: String,
       required: true,
@@ -11,7 +13,12 @@ module.exports = (mongoose) => {
     description: {
       type: String,
     },
+    dateOpened: {
+      type: Date,
+    },
   });
 
   return mongoose.model("jobposting", JobPostingSchema);
 };
+
+module.exports.getJobPostingSchema = () => JobPostingSchema;

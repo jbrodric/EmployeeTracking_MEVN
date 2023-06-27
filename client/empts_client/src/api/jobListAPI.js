@@ -1,24 +1,27 @@
 import axios from "axios";
 import backend from "./backend";
 
-class Job {
-  constructor(name, title, description) {
-    this.name = name;
-    this.title = title;
-    this.description = description;
-  }
-}
-
 class JobListAPI {
   #JOB_LIST_ENDPOINT_ONE =
     backend.API_BASE_URL + backend.JOB_LIST_API + backend.ONE_API;
   #JOB_LIST_ENDPOINT_BULK =
     backend.API_BASE_URL + backend.JOB_LIST_API + backend.BULK_API;
+  #JOB_LIST_ENDPOINT_SCHEMA =
+    backend.API_BASE_URL + backend.JOB_LIST_API + backend.SCHEMA_API;
 
-  static createJob(name, title, description) {
-    return new Job(name, title, description);
+  /**********Schema**********/
+  async getJobDBSchema() {
+    try {
+      const response = await axios.get(this.#JOB_LIST_ENDPOINT_SCHEMA);
+      const ret = {};
+      for (let key in response.data.keys()) ret[key] = "";
+      return ret;
+    } catch (error) {
+      console.error("Error fetching job:", error);
+    }
   }
 
+  /**********One**********/
   async getJobDB(id) {
     try {
       const response = await axios.get(this.#JOB_LIST_ENDPOINT_ONE + "/" + id);
