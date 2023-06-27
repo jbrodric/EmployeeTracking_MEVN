@@ -135,7 +135,7 @@ export default function RecordHeader(props) {
                   width="600px"
                   sx={{ fontWeight: "bold", margin: "0px" }}
                 >
-                  {recordName ? recordName : "Uknown Record"}
+                  {recordName ? recordName : "New Record"}
                 </Typography>
               </Grid>
             </Grid>
