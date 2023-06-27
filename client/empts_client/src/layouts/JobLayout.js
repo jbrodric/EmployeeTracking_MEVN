@@ -1,4 +1,4 @@
-export default function StdJobLayout() {
+export function StdJobLayout() {
   return {
     objectName: "Job",
     sections: [
@@ -22,7 +22,6 @@ export default function StdJobLayout() {
             name: "description",
             type: "textarea",
             label: "Description",
-            required: false,
           },
         ],
       },

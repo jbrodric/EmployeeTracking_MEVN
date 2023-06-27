@@ -4,7 +4,7 @@ import RecordEdit, { RecordData } from "./RecordEdit.js";
 import { Paper } from "@mui/material";
 import RecordHeader from "./RecordHeader.js";
 import WorkIcon from "@mui/icons-material/Work";
-import StdJobLayout from "../layouts/JobLayout.js";
+import { StdJobLayout } from "../layouts/JobLayout.js";
 
 export async function loader({ params }) {
   const jobListAPI = new backend.JobListAPI();
