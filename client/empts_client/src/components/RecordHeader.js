@@ -1,10 +1,9 @@
-import { Form } from "react-router-dom";
+import { Form, useNavigate } from "react-router-dom";
 import { Paper, Button, Typography, Box } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Grid from "@mui/material/Unstable_Grid2";
-import { useNavigate } from "react-router-dom";
 
 const HeaderPaper = styled((props) => (
   <Paper
@@ -27,7 +26,7 @@ export default function RecordHeader(props) {
   const navigate = useNavigate();
   const ButtonMap = {
     Edit: (
-      <>
+      <Box key="btn-edit">
         <Form action="edit">
           <Button
             variant="outlined"
@@ -38,10 +37,10 @@ export default function RecordHeader(props) {
             Edit
           </Button>
         </Form>
-      </>
+      </Box>
     ),
     Delete: (
-      <>
+      <Box key="btn-delete">
         <Form
           method="post"
           action="destroy"
@@ -62,42 +61,38 @@ export default function RecordHeader(props) {
             Delete
           </Button>
         </Form>
-      </>
+      </Box>
     ),
     Cancel: (
-      <>
-        <Form>
-          <Button
-            variant="outlined"
-            type="button"
-            sx={{ margin: "10px", backgroundColor: "white" }}
-            onClick={() => {
-              navigate(-1);
-            }}
-          >
-            Cancel
-          </Button>
-        </Form>
-      </>
+      <Box key="btn-cancel">
+        <Button
+          variant="outlined"
+          type="button"
+          sx={{ margin: "10px", backgroundColor: "white" }}
+          onClick={() => {
+            navigate(-1);
+          }}
+        >
+          Cancel
+        </Button>
+      </Box>
     ),
     Back: (
-      <>
-        <Form>
-          <Button
-            variant="outlined"
-            type="button"
-            sx={{ margin: "10px", backgroundColor: "white" }}
-            onClick={() => {
-              navigate(backURL);
-            }}
-          >
-            Back
-          </Button>
-        </Form>
-      </>
+      <Box key="btn-back">
+        <Button
+          variant="outlined"
+          type="button"
+          sx={{ margin: "10px", backgroundColor: "white" }}
+          onClick={() => {
+            navigate(backURL);
+          }}
+        >
+          Back
+        </Button>
+      </Box>
     ),
     Save: (
-      <>
+      <Box key="btn-save">
         <Button
           variant="outlined"
           type="submit"
@@ -105,7 +100,7 @@ export default function RecordHeader(props) {
         >
           Save
         </Button>
-      </>
+      </Box>
     ),
   };
 

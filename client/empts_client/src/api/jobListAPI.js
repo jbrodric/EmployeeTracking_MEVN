@@ -30,6 +30,7 @@ class JobListAPI {
 
   async createJobDB(job) {
     try {
+      console.log(job);
       const response = await axios.post(this.#JOB_LIST_ENDPOINT_ONE, job);
       return response.data;
     } catch (error) {
