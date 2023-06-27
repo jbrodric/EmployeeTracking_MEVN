@@ -19,6 +19,7 @@ export default function InputField(props) {
             rows={4}
             fullWidth
             size="small"
+            required={metadata.required}
           />
         </Box>
       );
@@ -35,6 +36,7 @@ export default function InputField(props) {
             defaultValue={data}
             fullWidth
             size="small"
+            required={metadata.required}
           />
         </Box>
       );
