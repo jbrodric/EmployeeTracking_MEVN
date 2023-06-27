@@ -1,10 +1,12 @@
 const { Router } = require("express");
 const initJobPosting = require("../../../models/JobPosting");
+
 let JobPosting;
-
 const router = Router();
+const { BULK_API, ONE_API } = process.env;
 
-router.get("/", async (req, res) => {
+/***************** Bulk API Methods *****************/
+router.get(BULK_API, async (req, res) => {
   try {
     const jobList = await JobPosting.find();
     if (!jobList) throw new Error("No Jobs found");
@@ -14,7 +16,19 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.get("/:id", async (req, res) => {
+router.delete(BULK_API, async (req, res) => {
+  const jobIdArray = req.body.Ids;
+  try {
+    const removed = await JobPosting.deleteMany({ _id: { $in: jobIdArray } });
+    if (!removed) throw Error("Something went wrong ");
+    res.status(200).json(removed);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+/***************** One API Methods *****************/
+router.get(ONE_API + "/:id", async (req, res) => {
   const { id } = req.params;
   try {
     const jobList = await JobPosting.findOne({ _id: id }).exec();
@@ -25,7 +39,7 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-router.post("/", async (req, res) => {
+router.post(ONE_API, async (req, res) => {
   const newJob = new JobPosting(req.body);
   try {
     const job = await newJob.save();
@@ -36,7 +50,7 @@ router.post("/", async (req, res) => {
   }
 });
 
-router.put("/", async (req, res) => {
+router.put(ONE_API, async (req, res) => {
   const newJob = new JobPosting(req.body);
   try {
     newJob.isNew = false;
@@ -48,7 +62,7 @@ router.put("/", async (req, res) => {
   }
 });
 
-router.delete("/:id", async (req, res) => {
+router.delete(ONE_API + "/:id", async (req, res) => {
   const { id } = req.params;
   try {
     const removed = await JobPosting.findByIdAndDelete(id);
