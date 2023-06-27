@@ -1,8 +1,7 @@
 import React from "react";
-import { useLoaderData, Form, redirect } from "react-router-dom";
+import { useLoaderData, redirect } from "react-router-dom";
 import backend from "../api/backend.js";
 import Datatable, { DataModel } from "./Datatable.js";
-import { Paper } from "@mui/material";
 
 export async function loader() {
   const jobListAPI = new backend.JobListAPI(backend.API_BASE_URL);
@@ -41,21 +40,12 @@ export default function JobList() {
   ]);
 
   return (
-    <Paper variant="elevation" elevation={8} className="page">
-      <div>
-        <div>
-          <Form method="post">
-            <button type="submit">New</button>
-          </Form>
-        </div>
-        <Datatable
-          title="Jobs"
-          data={data}
-          recordURL="/Job/"
-          recordIdField="_id"
-          useDense={true}
-        />
-      </div>
-    </Paper>
+    <Datatable
+      title="Jobs"
+      data={data}
+      recordURL="/Job/"
+      recordIdField="_id"
+      useDense={true}
+    />
   );
 }

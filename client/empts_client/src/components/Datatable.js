@@ -47,10 +47,11 @@ import Tooltip from "@mui/material/Tooltip";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Switch from "@mui/material/Switch";
 import DeleteIcon from "@mui/icons-material/Delete";
-import FilterListIcon from "@mui/icons-material/FilterList";
+import AddBoxIcon from "@mui/icons-material/AddBox";
 import { visuallyHidden } from "@mui/utils";
 import { Link } from "react-router-dom";
 import Grid from "@mui/material/Unstable_Grid2";
+import { Form } from "react-router-dom";
 
 const MAX_TEXT_LEN = 75;
 
@@ -188,6 +189,9 @@ function EnhancedTableToolbar(props) {
       sx={{
         pl: { sm: 2 },
         pr: { xs: 1, sm: 1 },
+        backgroundColor: "rgb(243, 243, 243)",
+        borderBottom: "1px solid rgba(224, 224, 224, 1)",
+        borderRadius: "5px 5px 0px 0px",
         ...(numSelected > 0 && {
           bgcolor: (theme) =>
             alpha(
@@ -224,10 +228,12 @@ function EnhancedTableToolbar(props) {
           </IconButton>
         </Tooltip>
       ) : (
-        <Tooltip title="Filter list">
-          <IconButton>
-            <FilterListIcon />
-          </IconButton>
+        <Tooltip title="Create New">
+          <Form method="post">
+            <IconButton type="submit">
+              <AddBoxIcon />
+            </IconButton>
+          </Form>
         </Tooltip>
       )}
     </Toolbar>
@@ -245,7 +251,7 @@ export default function EnhancedTable(props) {
   const [selected, setSelected] = React.useState([]);
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(useDense);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [rowsPerPage, setRowsPerPage] = React.useState(25);
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === "asc";
@@ -312,7 +318,7 @@ export default function EnhancedTable(props) {
 
   return (
     <Box sx={{ width: "100%" }}>
-      <Paper sx={{ width: "100%", mb: 2 }}>
+      <Paper variant="elevation" className="list-view" elevation={8}>
         <EnhancedTableToolbar numSelected={selected.length} title={title} />
         <TableContainer>
           <Table

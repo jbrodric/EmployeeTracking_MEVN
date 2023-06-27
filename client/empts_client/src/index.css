@@ -33,8 +33,12 @@ body {
 }
 
 div.page {
-  margin: 3% 3% 3% 3%;
+  margin: 3%;
   padding: 3%;
+}
+
+div.list-view {
+  margin: 3%;
 }
 
 div.record-page {
