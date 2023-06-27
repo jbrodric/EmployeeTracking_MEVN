@@ -9,6 +9,7 @@ import ErrorPage from "./error.js";
 import Job, { loader as jobLoader } from "./components/Job.js";
 import EditJob, { action as editJobAction } from "./components/EditJob.js";
 import { action as deleteJobAction } from "./components/DeleteJob.js";
+import { action as deleteJobActionBulk } from "./components/DeleteJobBulk.js";
 import About from "./components/About.js";
 import Home from "./components/Home.js";
 import Applications from "./components/Applications.js";
@@ -43,6 +44,10 @@ const router = createBrowserRouter([
           {
             path: "/Job/:jobId/destroy",
             action: deleteJobAction,
+          },
+          {
+            path: "/Jobs/destroy",
+            action: deleteJobActionBulk,
           },
           {
             path: "/Job",

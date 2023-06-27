@@ -1,6 +1,6 @@
 import JobListAPI from "./jobListAPI.js";
 
-function CreateMongoDBAPI() {
+function CreateAPI() {
   return {
     API_BASE_URL: process.env.REACT_APP_MONGO_API_BASE_URL,
     JOB_LIST_API: process.env.REACT_APP_MONGO_JOB_LIST_API,
@@ -10,6 +10,6 @@ function CreateMongoDBAPI() {
   };
 }
 
-const backend = CreateMongoDBAPI();
+const backend = CreateAPI();
 
 export default backend;

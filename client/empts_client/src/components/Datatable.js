@@ -56,18 +56,11 @@ import { Form } from "react-router-dom";
 const MAX_TEXT_LEN = 75;
 
 class DataModel {
-  autonumber = (() => {
-    let counter = 0;
-    return () => {
-      return "" + counter++;
-    };
-  })();
-
   constructor(rowData, columnData) {
     this.headCells = columnData;
 
     this.rows = rowData.map((row) => {
-      let newRow = { _datatable_id: this.autonumber(), ...row };
+      let newRow = { ...row };
 
       for (let headCell of this.headCells) {
         if (!newRow[headCell.id]) newRow[headCell.id] = "";
@@ -183,7 +176,7 @@ EnhancedTableHead.propTypes = {
 };
 
 function EnhancedTableToolbar(props) {
-  const { numSelected, title } = props;
+  const { numSelected, title, selected, setSelected } = props;
 
   return (
     <Toolbar
@@ -223,19 +216,35 @@ function EnhancedTableToolbar(props) {
       )}
 
       {numSelected > 0 ? (
-        <Tooltip title="Delete">
-          <IconButton>
-            <DeleteIcon />
-          </IconButton>
-        </Tooltip>
+        <Form
+          method="post"
+          action="destroy"
+          onSubmit={(event) => {
+            if (
+              !window.confirm(
+                "Please confirm you want to delete these records."
+              )
+            ) {
+              event.preventDefault();
+            }
+            setSelected([]);
+          }}
+        >
+          <input id="Selected-Ids" name="Ids" value={selected} type="hidden" />
+          <Tooltip title="Delete">
+            <IconButton type="submit">
+              <DeleteIcon />
+            </IconButton>
+          </Tooltip>
+        </Form>
       ) : (
-        <Tooltip title="Create New">
-          <Form method="post">
+        <Form method="post">
+          <Tooltip title="Create New">
             <IconButton type="submit">
               <AddBoxIcon />
             </IconButton>
-          </Form>
-        </Tooltip>
+          </Tooltip>
+        </Form>
       )}
     </Toolbar>
   );
@@ -262,7 +271,7 @@ export default function EnhancedTable(props) {
 
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
-      const newSelected = data.rows.map((n) => n._datatable_id);
+      const newSelected = data.rows.map((n) => n[recordIdField]);
       setSelected(newSelected);
       return;
     }
@@ -320,7 +329,12 @@ export default function EnhancedTable(props) {
   return (
     <Box sx={{ width: "100%" }}>
       <Paper variant="elevation" className="list-view" elevation={8}>
-        <EnhancedTableToolbar numSelected={selected.length} title={title} />
+        <EnhancedTableToolbar
+          numSelected={selected.length}
+          title={title}
+          selected={selected}
+          setSelected={setSelected}
+        />
         <TableContainer>
           <Table
             sx={{ minWidth: 750 }}
@@ -338,17 +352,17 @@ export default function EnhancedTable(props) {
             />
             <TableBody>
               {visibleRows.map((row, index) => {
-                const isItemSelected = isSelected(row._datatable_id);
+                const isItemSelected = isSelected(row[recordIdField]);
                 const labelId = `enhanced-table-checkbox-${index}`;
 
                 return (
                   <TableRow
                     hover
-                    onClick={(event) => handleClick(event, row._datatable_id)}
+                    onClick={(event) => handleClick(event, row[recordIdField])}
                     role="checkbox"
                     aria-checked={isItemSelected}
                     tabIndex={-1}
-                    key={row._datatable_id}
+                    key={row[recordIdField]}
                     selected={isItemSelected}
                     sx={{ cursor: "pointer" }}
                   >
@@ -372,7 +386,7 @@ export default function EnhancedTable(props) {
                             padding={
                               headCell.disablePadding ? "none" : "normal"
                             }
-                            key={row._datatable_id + "_" + headCell.id}
+                            key={row[recordIdField] + "_" + headCell.id}
                           >
                             <Link to={recordURL + row[recordIdField]}>
                               {row[headCell.id]
@@ -388,7 +402,7 @@ export default function EnhancedTable(props) {
                             padding={
                               headCell.disablePadding ? "none" : "normal"
                             }
-                            key={row._datatable_id + "_" + headCell.id}
+                            key={row[recordIdField] + "_" + headCell.id}
                           >
                             {row[headCell.id]}
                           </TableCell>

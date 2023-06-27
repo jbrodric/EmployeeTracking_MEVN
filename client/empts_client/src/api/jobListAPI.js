@@ -28,15 +28,6 @@ class JobListAPI {
     }
   }
 
-  async getJobListDB() {
-    try {
-      const response = await axios.get(this.#JOB_LIST_ENDPOINT_BULK);
-      return response.data;
-    } catch (error) {
-      console.error("Error fetching jobs:", error);
-    }
-  }
-
   async createJobDB(job) {
     try {
       const response = await axios.post(this.#JOB_LIST_ENDPOINT_ONE, job);
@@ -60,6 +51,27 @@ class JobListAPI {
       const response = await axios.delete(
         this.#JOB_LIST_ENDPOINT_ONE + "/" + id
       );
+      return response.data;
+    } catch (error) {
+      console.error("Error deleting job:", error);
+    }
+  }
+
+  /**********Bulk**********/
+  async getJobListDB() {
+    try {
+      const response = await axios.get(this.#JOB_LIST_ENDPOINT_BULK);
+      return response.data;
+    } catch (error) {
+      console.error("Error fetching jobs:", error);
+    }
+  }
+
+  async deleteJobBulk(jobIds) {
+    try {
+      const response = await axios.delete(this.#JOB_LIST_ENDPOINT_BULK, {
+        data: jobIds,
+      });
       return response.data;
     } catch (error) {
       console.error("Error deleting job:", error);
