@@ -73,16 +73,19 @@ export default function RecordEdit(params) {
                     <OutputField data={data[field.name]} metadata={field} />
                   </Grid>
                 );
-              else
-                return (
-                  <Grid
-                    xs={12}
-                    sm={12 / metadata.numColumns}
-                    key={field.name + "_" + index}
-                  >
-                    <InputField data={data[field.name]} metadata={field} />
-                  </Grid>
-                );
+              else {
+                if (!field.readOnly) {
+                  return (
+                    <Grid
+                      xs={12}
+                      sm={12 / metadata.numColumns}
+                      key={field.name + "_" + index}
+                    >
+                      <InputField data={data[field.name]} metadata={field} />
+                    </Grid>
+                  );
+                } else return <></>;
+              }
             })}
           </Grid>
         </Box>

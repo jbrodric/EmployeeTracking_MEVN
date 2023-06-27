@@ -6,6 +6,17 @@ class RecordData {
   constructor(data, metadata) {
     this.data = data;
     this.metadata = metadata;
+    this.setNumReadOnlyFieldsInSections();
+  }
+
+  setNumReadOnlyFieldsInSections() {
+    this.metadata.sections.forEach((section) => {
+      let readOnlyFieldCount = 0;
+      for (let field of section.fields)
+        if (field.readOnly) readOnlyFieldCount++;
+
+      section.numReadOnlyFields = readOnlyFieldCount;
+    });
   }
 }
 
@@ -15,14 +26,20 @@ export default function RecordEdit(params) {
   return (
     <Box>
       {recordData.metadata.sections.map((section, index) => {
-        return (
-          <Section
-            key={section.title + "_" + index}
-            data={recordData.data}
-            metadata={section}
-            mode={mode}
-          />
-        );
+        if (
+          section.fields.length === section.numReadOnlyFields &&
+          mode === "edit"
+        )
+          return <></>;
+        else
+          return (
+            <Section
+              key={section.title + "_" + index}
+              data={recordData.data}
+              metadata={section}
+              mode={mode}
+            />
+          );
       })}
     </Box>
   );
