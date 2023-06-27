@@ -23,6 +23,11 @@ body {
   align-items: center;
 }
 
+.center-vertically {
+  display: flex;
+  align-items: center;
+}
+
 #sidebar a.active {
   background: #f1f1f1;
 }

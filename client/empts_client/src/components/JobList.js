@@ -49,10 +49,11 @@ export default function JobList() {
           </Form>
         </div>
         <Datatable
-          title="Available Jobs"
+          title="Jobs"
           data={data}
           recordURL="/Job/"
           recordIdField="_id"
+          useDense={true}
         />
       </div>
     </Paper>
