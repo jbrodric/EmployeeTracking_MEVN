@@ -1,4 +1,4 @@
-import { Form, Link } from "react-router-dom";
+import { Form } from "react-router-dom";
 import { Paper, Button, Typography, Box } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import EditIcon from "@mui/icons-material/Edit";
@@ -83,15 +83,16 @@ export default function RecordHeader(props) {
     Back: (
       <>
         <Form>
-          <Link to={backURL}>
-            <Button
-              variant="outlined"
-              type="button"
-              sx={{ margin: "10px", backgroundColor: "white" }}
-            >
-              Back
-            </Button>
-          </Link>
+          <Button
+            variant="outlined"
+            type="button"
+            sx={{ margin: "10px", backgroundColor: "white" }}
+            onClick={() => {
+              navigate(backURL);
+            }}
+          >
+            Back
+          </Button>
         </Form>
       </>
     ),
