@@ -6,7 +6,7 @@ import RecordHeader from "./RecordHeader.js";
 import WorkIcon from "@mui/icons-material/Work";
 
 export async function loader({ params }) {
-  const jobListAPI = new backend.JobListAPI(backend.API_BASE_URL);
+  const jobListAPI = new backend.JobListAPI();
   let job;
 
   if (params.jobId) {

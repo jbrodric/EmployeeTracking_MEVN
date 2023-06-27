@@ -6,7 +6,7 @@ import RecordHeader from "./RecordHeader.js";
 import { getIcon } from "./Job.js";
 
 export async function action({ request, params }) {
-  const jobListAPI = new backend.JobListAPI(backend.API_BASE_URL);
+  const jobListAPI = new backend.JobListAPI();
   const formData = await request.formData();
   const updates = Object.fromEntries(formData);
 

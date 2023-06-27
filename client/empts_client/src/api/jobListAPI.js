@@ -1,4 +1,5 @@
 import axios from "axios";
+import backend from "./backend";
 
 class Job {
   constructor(name, title, description) {
@@ -9,9 +10,10 @@ class Job {
 }
 
 class JobListAPI {
-  constructor(apiBaseURL) {
-    this.jobListEndPoint = apiBaseURL + "api/JobList/";
-  }
+  #JOB_LIST_ENDPOINT_ONE =
+    backend.API_BASE_URL + backend.JOB_LIST_API + backend.ONE_API;
+  #JOB_LIST_ENDPOINT_BULK =
+    backend.API_BASE_URL + backend.JOB_LIST_API + backend.BULK_API;
 
   static createJob(name, title, description) {
     return new Job(name, title, description);
@@ -19,7 +21,7 @@ class JobListAPI {
 
   async getJobDB(id) {
     try {
-      const response = await axios.get(this.jobListEndPoint + "/" + id);
+      const response = await axios.get(this.#JOB_LIST_ENDPOINT_ONE + "/" + id);
       return response.data;
     } catch (error) {
       console.error("Error fetching job:", error);
@@ -28,7 +30,7 @@ class JobListAPI {
 
   async getJobListDB() {
     try {
-      const response = await axios.get(this.jobListEndPoint);
+      const response = await axios.get(this.#JOB_LIST_ENDPOINT_BULK);
       return response.data;
     } catch (error) {
       console.error("Error fetching jobs:", error);
@@ -37,7 +39,7 @@ class JobListAPI {
 
   async createJobDB(job) {
     try {
-      const response = await axios.post(this.jobListEndPoint, job);
+      const response = await axios.post(this.#JOB_LIST_ENDPOINT_ONE, job);
       return response.data;
     } catch (error) {
       console.error("Error creating job:", error);
@@ -46,7 +48,7 @@ class JobListAPI {
 
   async updateJobDB(job) {
     try {
-      const response = await axios.put(this.jobListEndPoint, job);
+      const response = await axios.put(this.#JOB_LIST_ENDPOINT_ONE, job);
       return response.data;
     } catch (error) {
       console.error("Error updating job:", error);
@@ -55,7 +57,9 @@ class JobListAPI {
 
   async deleteJobDB(id) {
     try {
-      const response = await axios.delete(this.jobListEndPoint + "/" + id);
+      const response = await axios.delete(
+        this.#JOB_LIST_ENDPOINT_ONE + "/" + id
+      );
       return response.data;
     } catch (error) {
       console.error("Error deleting job:", error);

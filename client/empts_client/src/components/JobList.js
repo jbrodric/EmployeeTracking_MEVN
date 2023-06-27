@@ -4,7 +4,7 @@ import backend from "../api/backend.js";
 import Datatable, { DataModel } from "./Datatable.js";
 
 export async function loader() {
-  const jobListAPI = new backend.JobListAPI(backend.API_BASE_URL);
+  const jobListAPI = new backend.JobListAPI();
   const jobList = await jobListAPI.getJobListDB();
   return { jobList };
 }
