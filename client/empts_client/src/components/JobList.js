@@ -2,6 +2,7 @@ import React from "react";
 import { useLoaderData, redirect } from "react-router-dom";
 import backend from "../api/backend.js";
 import Datatable, { DataModel } from "./Datatable.js";
+import { StdJobListView } from "../listViews/JobListView.js";
 
 export async function loader() {
   const jobListAPI = new backend.JobListAPI();
@@ -15,29 +16,7 @@ export async function action() {
 
 export default function JobList() {
   const { jobList } = useLoaderData();
-  const data = new DataModel(jobList, [
-    {
-      id: "name",
-      numeric: false,
-      type: "text",
-      disablePadding: true,
-      label: "Name",
-    },
-    {
-      id: "title",
-      numeric: false,
-      type: "text",
-      disablePadding: true,
-      label: "Title",
-    },
-    {
-      id: "description",
-      numeric: false,
-      type: "text",
-      disablePadding: false,
-      label: "Description",
-    },
-  ]);
+  const data = new DataModel(jobList, StdJobListView());
 
   return (
     <Datatable

@@ -376,6 +376,11 @@ export default function EnhancedTable(props) {
                       />
                     </TableCell>
                     {data.headCells.map((headCell, index) => {
+                      let formattedData = row[headCell.id];
+
+                      if (headCell.type === "date")
+                        formattedData = headCell.formatter(formattedData);
+
                       if (index === 0) {
                         return (
                           <TableCell
@@ -389,9 +394,7 @@ export default function EnhancedTable(props) {
                             key={row[recordIdField] + "_" + headCell.id}
                           >
                             <Link to={recordURL + row[recordIdField]}>
-                              {row[headCell.id]
-                                ? row[headCell.id]
-                                : "Link to Record"}
+                              {formattedData ? formattedData : "Link to Record"}
                             </Link>
                           </TableCell>
                         );
@@ -404,7 +407,7 @@ export default function EnhancedTable(props) {
                             }
                             key={row[recordIdField] + "_" + headCell.id}
                           >
-                            {row[headCell.id]}
+                            {formattedData}
                           </TableCell>
                         );
                       }
