@@ -25,7 +25,6 @@ export default function InputField(props) {
           <TextField
             id={metadata.name}
             label={metadata.label}
-            name={metadata.name + "_display"}
             placeholder="Please enter a number"
             variant="outlined"
             defaultValue={formatCurrencyUI(metadata.getter(data))}
