@@ -24,6 +24,11 @@ export function formatCurrencyUI(data) {
   return data ? formatter.format(data) : "";
 }
 
+export function parseCurrencyUI(data) {
+  const regex = /,|\$/gi;
+  return data.replaceAll(regex, "");
+}
+
 export function getCurrency(data) {
   return backend.JobListAPI.getCurrency(data);
 }

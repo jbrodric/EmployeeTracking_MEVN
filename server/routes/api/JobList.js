@@ -52,6 +52,7 @@ router.get(ONE_API + "/:id", async (req, res) => {
 });
 
 router.post(ONE_API, async (req, res) => {
+  for (prop in req.body) if (req.body[prop] === "") req.body[prop] = undefined; // This will blank in db
   const newJob = new JobPosting(req.body);
   try {
     const job = await newJob.save();
@@ -63,6 +64,7 @@ router.post(ONE_API, async (req, res) => {
 });
 
 router.put(ONE_API, async (req, res) => {
+  for (prop in req.body) if (req.body[prop] === "") req.body[prop] = undefined; // This will blank in db
   const newJob = new JobPosting(req.body);
   try {
     newJob.isNew = false;
