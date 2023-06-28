@@ -1,4 +1,4 @@
-import { formatDateUI } from "../Utils";
+import { formatDateUI, formatCurrencyUI, getCurrency } from "../api/Utils";
 
 export function StdJobListView() {
   return [
@@ -30,6 +30,24 @@ export function StdJobListView() {
       disablePadding: false,
       label: "Date Opened",
       formatter: formatDateUI,
+    },
+    {
+      id: "minSalary",
+      numeric: true,
+      type: "currency",
+      disablePadding: false,
+      label: "Minimum Salary",
+      formatter: formatCurrencyUI,
+      getter: getCurrency,
+    },
+    {
+      id: "maxSalary",
+      numeric: true,
+      type: "currency",
+      disablePadding: false,
+      label: "Maximum Salary",
+      formatter: formatCurrencyUI,
+      getter: getCurrency,
     },
   ];
 }

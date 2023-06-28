@@ -4,12 +4,31 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import dayjs from "dayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import CurrencyInput from "react-currency-input-field";
 
 export default function InputField(props) {
   const { metadata, data } = props;
   let ret;
 
   switch (metadata.type) {
+    case "currency":
+      ret = (
+        <Box sx={{ height: "100%", position: "relative" }}>
+          <CurrencyInput
+            id={metadata.name}
+            label={metadata.label}
+            name={metadata.name}
+            placeholder="Please enter a number"
+            defaultValue={metadata.getter(data)}
+            decimalsLimit={2}
+            variant="outlined"
+            fullWidth
+            size="small"
+            required={metadata.required}
+          />
+        </Box>
+      );
+      break;
     case "date":
       ret = (
         <Box sx={{ height: "100%", position: "relative" }}>

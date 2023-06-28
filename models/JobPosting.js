@@ -16,6 +16,12 @@ module.exports.initJobPosting = (mongoose) => {
     dateOpened: {
       type: Date,
     },
+    minSalary: {
+      type: mongoose.Schema.Types.Decimal128,
+    },
+    maxSalary: {
+      type: mongoose.Schema.Types.Decimal128,
+    },
   });
 
   return mongoose.model("jobposting", JobPostingSchema);

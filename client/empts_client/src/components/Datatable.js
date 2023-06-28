@@ -376,9 +376,14 @@ export default function EnhancedTable(props) {
                       />
                     </TableCell>
                     {data.headCells.map((headCell, index) => {
-                      let formattedData = row[headCell.id];
+                      let formattedData = headCell.getter
+                        ? headCell.getter(row[headCell.id])
+                        : row[headCell.id];
 
-                      if (headCell.type === "date")
+                      if (
+                        headCell.type === "date" ||
+                        headCell.type === "currency"
+                      )
                         formattedData = headCell.formatter(formattedData);
 
                       if (index === 0) {

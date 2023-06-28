@@ -1,4 +1,4 @@
-import { formatDateUI } from "../Utils";
+import { formatDateUI, formatCurrencyUI, getCurrency } from "../api/Utils";
 
 export function StdJobLayout() {
   return {
@@ -30,6 +30,20 @@ export function StdJobLayout() {
             type: "date",
             label: "Date Opened",
             formatter: formatDateUI,
+          },
+          {
+            name: "minSalary",
+            type: "currency",
+            label: "Minimum Salary",
+            formatter: formatCurrencyUI,
+            getter: getCurrency,
+          },
+          {
+            name: "maxSalary",
+            type: "currency",
+            label: "Maximum Salary",
+            formatter: formatCurrencyUI,
+            getter: getCurrency,
           },
         ],
       },

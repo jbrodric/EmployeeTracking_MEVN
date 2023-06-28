@@ -9,6 +9,11 @@ class JobListAPI {
   #JOB_LIST_ENDPOINT_SCHEMA =
     backend.API_BASE_URL + backend.JOB_LIST_API + backend.SCHEMA_API;
 
+  /**********Util**********/
+  static getCurrency(data) {
+    return data ? data.$numberDecimal : "";
+  }
+
   /**********Schema**********/
   async getJobDBSchema() {
     try {
@@ -42,7 +47,6 @@ class JobListAPI {
 
   async updateJobDB(job) {
     try {
-      console.log(job);
       const response = await axios.put(this.#JOB_LIST_ENDPOINT_ONE, job);
       return response.data;
     } catch (error) {
