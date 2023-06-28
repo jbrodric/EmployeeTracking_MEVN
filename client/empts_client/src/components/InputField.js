@@ -15,15 +15,9 @@ export default function InputField(props) {
     case "currency":
       ret = (
         <Box sx={{ height: "100%", position: "relative" }}>
-          <input
-            id={metadata.name + "_submit"}
-            name={metadata.name}
-            defaultValue={metadata.getter(data)}
-            type="hidden"
-            error={hasError}
-          />
           <TextField
             id={metadata.name}
+            name={metadata.name}
             label={metadata.label}
             placeholder="Please enter a number"
             variant="outlined"
@@ -41,12 +35,15 @@ export default function InputField(props) {
 
               if (Number.isNaN(parsedInput) && isNotBlank) {
                 setHasError(true);
+                event.target.setCustomValidity("Not a number");
+                event.target.reportValidity();
               } else {
-                let fixedNum = isNotBlank ? parsedInput.toFixed(2) : "";
+                event.target.setCustomValidity("");
+                event.target.reportValidity();
                 setHasError(false);
-                document.getElementById(metadata.name + "_submit").value =
-                  fixedNum;
-                event.target.value = formatCurrencyUI(fixedNum);
+                event.target.value = formatCurrencyUI(
+                  isNotBlank ? parsedInput.toFixed(2) : ""
+                );
               }
             }}
           />

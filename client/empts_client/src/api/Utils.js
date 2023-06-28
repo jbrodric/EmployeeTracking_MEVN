@@ -29,6 +29,16 @@ export function parseCurrencyUI(data) {
   return data.replaceAll(regex, "");
 }
 
+export function parseUIData(data, metadata) {
+  for (let section of metadata.sections) {
+    for (let field of section.fields) {
+      if (field.type === "currency")
+        data[field.name] = parseCurrencyUI(data[field.name]);
+    }
+  }
+  return data;
+}
+
 export function getCurrency(data) {
   return backend.JobListAPI.getCurrency(data);
 }
