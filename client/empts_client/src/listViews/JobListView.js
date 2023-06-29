@@ -69,5 +69,12 @@ export function StdJobListView() {
       label: "Number of Employees",
       formatter: formatNumberUI,
     },
+    {
+      id: "type",
+      numeric: false,
+      type: "picklist",
+      disablePadding: false,
+      label: "Type",
+    },
   ];
 }

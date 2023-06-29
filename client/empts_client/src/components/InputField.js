@@ -7,6 +7,10 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { parseCurrencyUI, formatCurrencyUI } from "../api/Utils";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
 
 export default function InputField(props) {
   const { metadata, data } = props;
@@ -14,6 +18,37 @@ export default function InputField(props) {
   const [hasError, setHasError] = React.useState(false);
 
   switch (metadata.type) {
+    case "picklist":
+      ret = (
+        <>
+          <Box sx={{ height: "100%", position: "relative" }}>
+            <FormControl fullWidth>
+              <InputLabel
+                id={metadata.name + "_label"}
+                size="small"
+                required={metadata.required}
+              >
+                {metadata.label}
+              </InputLabel>
+              <Select
+                labelId={metadata.name + "_label"}
+                id={metadata.name}
+                name={metadata.name}
+                defaultValue={data}
+                label={metadata.label}
+                size="small"
+                variant="outlined"
+                required={metadata.required}
+              >
+                {metadata.values.map((value) => {
+                  return <MenuItem value={value}>{value}</MenuItem>;
+                })}
+              </Select>
+            </FormControl>
+          </Box>
+        </>
+      );
+      break;
     case "number":
       ret = (
         <Box sx={{ height: "100%", position: "relative" }}>

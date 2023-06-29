@@ -26,6 +26,19 @@ export function StdJobLayout() {
             required: true,
           },
           {
+            name: "type",
+            type: "picklist",
+            label: "Type",
+            values: [
+              "Information Technology",
+              "Healthcare",
+              "Law",
+              "Hospitality",
+              "Government",
+            ],
+            required: true,
+          },
+          {
             name: "description",
             type: "textarea",
             label: "Description",
@@ -35,6 +48,11 @@ export function StdJobLayout() {
             type: "date",
             label: "Date Opened",
             formatter: formatDateUI,
+          },
+          {
+            name: "active",
+            type: "checkbox",
+            label: "Active",
           },
           {
             name: "minSalary",
@@ -49,11 +67,6 @@ export function StdJobLayout() {
             label: "Maximum Salary",
             formatter: formatCurrencyUI,
             getter: getCurrency,
-          },
-          {
-            name: "active",
-            type: "checkbox",
-            label: "Active",
           },
           {
             name: "numberOfEmployees",

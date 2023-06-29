@@ -28,6 +28,9 @@ module.exports.initJobPosting = (mongoose) => {
     numberOfEmployees: {
       type: Number,
     },
+    type: {
+      type: String,
+    },
   });
 
   return mongoose.model("jobposting", JobPostingSchema);

@@ -23,6 +23,7 @@ export default function OutputField(props) {
           <Divider absolute={true} />
         </Box>
       );
+    case "picklist":
     case "number":
     case "currency":
     case "date":
