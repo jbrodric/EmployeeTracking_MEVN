@@ -47,7 +47,6 @@ class JobListAPI {
 
   async updateJobDB(job) {
     try {
-      console.log(job);
       const response = await axios.put(this.#JOB_LIST_ENDPOINT_ONE, job);
       return response.data;
     } catch (error) {
