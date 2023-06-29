@@ -76,6 +76,32 @@ export function StdJobLayout() {
           },
         ],
       },
+      {
+        title: "Qualifications",
+        numColumns: 2,
+        fields: [
+          {
+            name: "qualification1",
+            type: "textarea",
+            label: "Qualification 1",
+          },
+          {
+            name: "qualification2",
+            type: "textarea",
+            label: "Qualification 2",
+          },
+          {
+            name: "qualification3",
+            type: "textarea",
+            label: "Qualification 3",
+          },
+          {
+            name: "qualification4",
+            type: "textarea",
+            label: "Qualification 4",
+          },
+        ],
+      },
     ],
   };
 }
