@@ -382,7 +382,8 @@ export default function EnhancedTable(props) {
 
                       if (
                         headCell.type === "date" ||
-                        headCell.type === "currency"
+                        headCell.type === "currency" ||
+                        headCell.type === "number"
                       )
                         formattedData = headCell.formatter(formattedData);
 

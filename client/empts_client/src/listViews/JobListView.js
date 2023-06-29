@@ -1,4 +1,9 @@
-import { formatDateUI, formatCurrencyUI, getCurrency } from "../api/Utils";
+import {
+  formatDateUI,
+  formatCurrencyUI,
+  getCurrency,
+  formatNumberUI,
+} from "../api/Utils";
 
 export function StdJobListView() {
   return [
@@ -55,6 +60,14 @@ export function StdJobListView() {
       type: "checkbox",
       disablePadding: false,
       label: "Active",
+    },
+    {
+      id: "numberOfEmployees",
+      numeric: true,
+      type: "number",
+      disablePadding: false,
+      label: "Number of Employees",
+      formatter: formatNumberUI,
     },
   ];
 }

@@ -23,6 +23,7 @@ export default function OutputField(props) {
           <Divider absolute={true} />
         </Box>
       );
+    case "number":
     case "currency":
     case "date":
     case "textarea":

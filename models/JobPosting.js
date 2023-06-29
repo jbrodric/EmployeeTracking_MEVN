@@ -25,6 +25,9 @@ module.exports.initJobPosting = (mongoose) => {
     active: {
       type: Boolean,
     },
+    numberOfEmployees: {
+      type: Number,
+    },
   });
 
   return mongoose.model("jobposting", JobPostingSchema);

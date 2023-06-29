@@ -24,6 +24,10 @@ export function formatCurrencyUI(data) {
   return data ? formatter.format(data) : "";
 }
 
+export function formatNumberUI(data) {
+  return data ? data.toLocaleString("en-US") : "";
+}
+
 export function parseCurrencyUI(data) {
   const regex = /,|\$/gi;
   return data.replaceAll(regex, "");
@@ -36,6 +40,8 @@ export function parseUIData(data, metadata) {
         data[field.name] = parseCurrencyUI(data[field.name]);
       else if (field.type === "checkbox")
         data[field.name] = data[field.name] === "on" ? true : false;
+      else if (field.type === "number")
+        data[field.name] = parseCurrencyUI(data[field.name]);
     }
   }
   return data;

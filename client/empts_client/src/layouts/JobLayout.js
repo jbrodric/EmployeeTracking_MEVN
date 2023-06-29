@@ -1,4 +1,9 @@
-import { formatDateUI, formatCurrencyUI, getCurrency } from "../api/Utils";
+import {
+  formatDateUI,
+  formatCurrencyUI,
+  getCurrency,
+  formatNumberUI,
+} from "../api/Utils";
 
 export function StdJobLayout() {
   return {
@@ -49,6 +54,12 @@ export function StdJobLayout() {
             name: "active",
             type: "checkbox",
             label: "Active",
+          },
+          {
+            name: "numberOfEmployees",
+            type: "number",
+            label: "Number of Employees",
+            formatter: formatNumberUI,
           },
         ],
       },

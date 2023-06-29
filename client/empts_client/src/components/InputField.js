@@ -14,6 +14,43 @@ export default function InputField(props) {
   const [hasError, setHasError] = React.useState(false);
 
   switch (metadata.type) {
+    case "number":
+      ret = (
+        <Box sx={{ height: "100%", position: "relative" }}>
+          <TextField
+            id={metadata.name}
+            label={metadata.label}
+            variant="outlined"
+            name={metadata.name}
+            defaultValue={metadata.formatter(data)}
+            fullWidth
+            size="small"
+            required={metadata.required}
+            error={hasError}
+            helperText={hasError ? "Please enter a whole number" : ""}
+            onBlur={(event) => {
+              let parsedInput = Number.parseFloat(
+                parseCurrencyUI(event.target.value)
+              );
+              let isNotBlank = event.target.value !== "";
+
+              if (Number.isNaN(parsedInput) && isNotBlank) {
+                setHasError(true);
+                event.target.setCustomValidity("Not a whole number");
+                event.target.reportValidity();
+              } else {
+                event.target.setCustomValidity("");
+                event.target.reportValidity();
+                setHasError(false);
+                event.target.value = metadata.formatter(
+                  isNotBlank ? parsedInput : ""
+                );
+              }
+            }}
+          />
+        </Box>
+      );
+      break;
     case "checkbox":
       ret = (
         <Box sx={{ height: "100%", position: "relative" }}>
@@ -41,7 +78,7 @@ export default function InputField(props) {
             label={metadata.label}
             placeholder="Please enter a number"
             variant="outlined"
-            defaultValue={formatCurrencyUI(metadata.getter(data))}
+            defaultValue={metadata.formatter(metadata.getter(data))}
             fullWidth
             size="small"
             required={metadata.required}
