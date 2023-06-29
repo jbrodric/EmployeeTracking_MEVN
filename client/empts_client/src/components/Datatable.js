@@ -412,7 +412,31 @@ export default function EnhancedTable(props) {
                             }
                             key={row[recordIdField] + "_" + headCell.id}
                           >
-                            {formattedData}
+                            {
+                              new Array(
+                                (() => {
+                                  if (headCell.type === "checkbox")
+                                    return (
+                                      <Checkbox
+                                        id={
+                                          row[recordIdField] + "_" + headCell.id
+                                        }
+                                        defaultChecked={formattedData === true}
+                                        key={
+                                          row[recordIdField] +
+                                          "_" +
+                                          headCell.id +
+                                          "_data"
+                                        }
+                                        disabled={true}
+                                        size="small"
+                                        sx={{ padding: 0 }}
+                                      />
+                                    );
+                                  else return formattedData;
+                                })()
+                              )
+                            }
                           </TableCell>
                         );
                       }

@@ -34,6 +34,8 @@ export function parseUIData(data, metadata) {
     for (let field of section.fields) {
       if (field.type === "currency")
         data[field.name] = parseCurrencyUI(data[field.name]);
+      else if (field.type === "checkbox")
+        data[field.name] = data[field.name] === "on" ? true : false;
     }
   }
   return data;

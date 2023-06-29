@@ -5,6 +5,8 @@ import dayjs from "dayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { parseCurrencyUI, formatCurrencyUI } from "../api/Utils";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Checkbox from "@mui/material/Checkbox";
 
 export default function InputField(props) {
   const { metadata, data } = props;
@@ -12,6 +14,24 @@ export default function InputField(props) {
   const [hasError, setHasError] = React.useState(false);
 
   switch (metadata.type) {
+    case "checkbox":
+      ret = (
+        <Box sx={{ height: "100%", position: "relative" }}>
+          <FormControlLabel
+            required={metadata.required}
+            control={
+              <Checkbox
+                id={metadata.name}
+                name={metadata.name}
+                defaultChecked={data}
+                size="small"
+              />
+            }
+            label={metadata.label}
+          />
+        </Box>
+      );
+      break;
     case "currency":
       ret = (
         <Box sx={{ height: "100%", position: "relative" }}>

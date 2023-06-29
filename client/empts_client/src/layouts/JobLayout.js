@@ -45,6 +45,11 @@ export function StdJobLayout() {
             formatter: formatCurrencyUI,
             getter: getCurrency,
           },
+          {
+            name: "active",
+            type: "checkbox",
+            label: "Active",
+          },
         ],
       },
     ],

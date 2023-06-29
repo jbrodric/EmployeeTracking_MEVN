@@ -49,5 +49,12 @@ export function StdJobListView() {
       formatter: formatCurrencyUI,
       getter: getCurrency,
     },
+    {
+      id: "active",
+      numeric: false,
+      type: "checkbox",
+      disablePadding: false,
+      label: "Active",
+    },
   ];
 }

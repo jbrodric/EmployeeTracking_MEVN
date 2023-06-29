@@ -22,6 +22,9 @@ module.exports.initJobPosting = (mongoose) => {
     maxSalary: {
       type: mongoose.Schema.Types.Decimal128,
     },
+    active: {
+      type: Boolean,
+    },
   });
 
   return mongoose.model("jobposting", JobPostingSchema);
