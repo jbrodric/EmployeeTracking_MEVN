@@ -1,10 +1,10 @@
 import { Form, useLoaderData, redirect } from "react-router-dom";
-import backend from "../api/backend.js";
-import RecordEdit from "./RecordEdit.js";
+import backend from "../../api/backend.js";
+import RecordEdit from "../Generic/RecordEdit.js";
 import { Paper } from "@mui/material";
-import RecordHeader from "./RecordHeader.js";
+import RecordHeader from "../Generic/RecordHeader.js";
 import { getIcon } from "./Job.js";
-import { parseUIData } from "../api/Utils.js";
+import { parseUIData } from "../../api/Utils.js";
 
 let recordData;
 

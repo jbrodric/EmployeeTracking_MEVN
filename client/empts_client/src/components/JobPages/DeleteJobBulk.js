@@ -1,5 +1,5 @@
 import { redirect } from "react-router-dom";
-import backend from "../api/backend.js";
+import backend from "../../api/backend.js";
 
 export async function action({ request }) {
   const jobListAPI = new backend.JobListAPI();

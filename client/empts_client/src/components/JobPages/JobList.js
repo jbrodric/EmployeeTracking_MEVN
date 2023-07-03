@@ -1,8 +1,8 @@
 import React from "react";
 import { useLoaderData, redirect } from "react-router-dom";
-import backend from "../api/backend.js";
-import Datatable, { DataModel } from "./Datatable.js";
-import { StdJobListView } from "../listViews/JobListView.js";
+import backend from "../../api/backend.js";
+import Datatable, { DataModel } from "../Generic/Datatable.js";
+import { StdJobListView } from "../../listViews/JobListView.js";
 
 export async function loader() {
   const jobListAPI = new backend.JobListAPI();

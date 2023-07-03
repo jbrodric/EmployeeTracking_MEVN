@@ -1,10 +1,10 @@
 import { useLoaderData } from "react-router-dom";
-import backend from "../api/backend.js";
-import RecordEdit, { RecordData } from "./RecordEdit.js";
+import backend from "../../api/backend.js";
+import RecordEdit, { RecordData } from "../Generic/RecordEdit.js";
 import { Paper } from "@mui/material";
-import RecordHeader from "./RecordHeader.js";
+import RecordHeader from "../Generic/RecordHeader.js";
 import WorkIcon from "@mui/icons-material/Work";
-import { StdJobLayout } from "../layouts/JobLayout.js";
+import { StdJobLayout } from "../../layouts/JobLayout.js";
 
 export async function loader({ params }) {
   const jobListAPI = new backend.JobListAPI();

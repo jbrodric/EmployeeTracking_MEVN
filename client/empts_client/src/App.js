@@ -3,13 +3,15 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import JobList, {
   loader as jobListLoader,
   action as jobListAction,
-} from "./components/JobList.js";
+} from "./components/JobPages/JobList.js";
 import Root from "./components/root.js";
 import ErrorPage from "./error.js";
-import Job, { loader as jobLoader } from "./components/Job.js";
-import EditJob, { action as editJobAction } from "./components/EditJob.js";
-import { action as deleteJobAction } from "./components/DeleteJob.js";
-import { action as deleteJobActionBulk } from "./components/DeleteJobBulk.js";
+import Job, { loader as jobLoader } from "./components/JobPages/Job.js";
+import EditJob, {
+  action as editJobAction,
+} from "./components/JobPages/EditJob.js";
+import { action as deleteJobAction } from "./components/JobPages/DeleteJob.js";
+import { action as deleteJobActionBulk } from "./components/JobPages/DeleteJobBulk.js";
 import About from "./components/About.js";
 import Home from "./components/Home.js";
 import Applications from "./components/Applications.js";
