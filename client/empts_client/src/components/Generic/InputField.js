@@ -41,7 +41,11 @@ export default function InputField(props) {
                 required={metadata.required}
               >
                 {metadata.values.map((value) => {
-                  return <MenuItem value={value}>{value}</MenuItem>;
+                  return (
+                    <MenuItem value={value} key={value}>
+                      {value}
+                    </MenuItem>
+                  );
                 })}
               </Select>
             </FormControl>
@@ -95,7 +99,7 @@ export default function InputField(props) {
               <Checkbox
                 id={metadata.name}
                 name={metadata.name}
-                defaultChecked={data}
+                defaultChecked={data ? data : false}
                 size="small"
               />
             }

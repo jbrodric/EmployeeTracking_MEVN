@@ -48,5 +48,5 @@ export function parseUIData(data, metadata) {
 }
 
 export function getCurrency(data) {
-  return backend.JobListAPI.getCurrency(data);
+  return backend.RecordAPI.getCurrency(data);
 }

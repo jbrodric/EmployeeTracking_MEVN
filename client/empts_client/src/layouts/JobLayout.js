@@ -7,7 +7,6 @@ import {
 
 export function StdJobLayout() {
   return {
-    objectName: "Job",
     sections: [
       {
         title: "Information",
