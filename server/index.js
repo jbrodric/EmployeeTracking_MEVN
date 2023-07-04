@@ -11,15 +11,13 @@ const {
 } = require("dotenv").config();
 const cors = require("cors");
 const bodyParser = require("body-parser");
-const { JobListRoutes, initJobListModel } = require("./routes/api/JobList");
+const { initRecordListModel } = require("./routes/api/RecordList");
+const { initJobPosting, getJobPostingSchema } = require("../models/JobPosting");
+const { initCandidate, getCandidateSchema } = require("../models/Candidate");
 const {
-  JobApplicationListRoutes,
-  initJobApplicationListModel,
-} = require("./routes/api/JobApplicationList");
-const {
-  CandidateListRoutes,
-  initCandidateListModel,
-} = require("./routes/api/CandidateList");
+  initJobApplication,
+  getJobApplicationSchema,
+} = require("../models/JobApplication");
 const path = require("path");
 
 mongoose
@@ -30,13 +28,9 @@ mongoose
   .then(() => {
     console.log("MongoDB database Connected...");
 
-    initModel();
-
     app.use(cors()); // to allow cross origin requests
     app.use(bodyParser.json()); // to convert the request into JSON
-    app.use(process.env.API_JOB_LIST_PATH, JobListRoutes);
-    app.use(process.env.API_JOB_APP_LIST_PATH, JobApplicationListRoutes);
-    app.use(process.env.API_CANDIDATE_LIST_PATH, CandidateListRoutes);
+    initAPIRoutes(app);
     app.listen(process.env.PORT, () =>
       console.log(
         `App listening at ${process.env.API_BASE_URL}:${process.env.PORT}`
@@ -45,8 +39,27 @@ mongoose
   })
   .catch((err) => console.log(err));
 
-function initModel() {
-  initJobListModel(mongoose);
-  initJobApplicationListModel(mongoose);
-  initCandidateListModel(mongoose);
+function initAPIRoutes(app) {
+  app.use(
+    process.env.API_JOB_LIST_PATH,
+    initRecordListModel(mongoose, initJobPosting, getJobPostingSchema, "Job")
+  );
+  app.use(
+    process.env.API_JOB_APP_LIST_PATH,
+    initRecordListModel(
+      mongoose,
+      initJobApplication,
+      getJobApplicationSchema,
+      "Job Application"
+    )
+  );
+  app.use(
+    process.env.API_CANDIDATE_LIST_PATH,
+    initRecordListModel(
+      mongoose,
+      initCandidate,
+      getCandidateSchema,
+      "Candidate"
+    )
+  );
 }
