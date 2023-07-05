@@ -17,6 +17,7 @@ export function JobApplicationLayout() {
             name: "jobPostingId",
             type: "lookup",
             label: "Job Posting",
+            url: "/Job/",
             required: true,
           },
           {
@@ -29,6 +30,7 @@ export function JobApplicationLayout() {
           {
             name: "candidateId",
             type: "lookup",
+            url: "/candidate/",
             label: "Candidate",
             required: true,
           },

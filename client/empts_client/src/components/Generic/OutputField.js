@@ -1,6 +1,7 @@
 import { Typography, Box, Divider } from "@mui/material";
 import React from "react";
 import Checkbox from "@mui/material/Checkbox";
+import { Link } from "react-router-dom";
 
 export default function OutputField(props) {
   const { metadata, data } = props;
@@ -20,6 +21,18 @@ export default function OutputField(props) {
             size="small"
             sx={{ padding: 0 }}
           />
+          <Divider absolute={true} />
+        </Box>
+      );
+    case "lookup":
+      return (
+        <Box sx={{ height: "100%", position: "relative" }}>
+          <Typography variant="subtitle2">{metadata.label}</Typography>
+          <Link to={metadata.url + formattedData}>
+            <Typography variant="caption">
+              {formattedData ? formattedData : <>&nbsp;</>}
+            </Typography>
+          </Link>
           <Divider absolute={true} />
         </Box>
       );
