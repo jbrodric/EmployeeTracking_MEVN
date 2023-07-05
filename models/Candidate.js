@@ -10,7 +10,7 @@ module.exports.initCandidate = (mongoose) => {
       type: String,
     },
     yearsExperience: {
-      type: mongoose.Schema.Types.Decimal128,
+      type: Number,
     },
   });
 

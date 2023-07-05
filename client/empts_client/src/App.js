@@ -23,6 +23,9 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { StdJobListView } from "./listViews/JobListView.js";
 import JobMetadata from "./Object Metadata/Job.js";
 import { StdJobLayout } from "./layouts/JobLayout.js";
+import { CandidateListView } from "./listViews/CandidateListView.js";
+import CandidateMetadata from "./Object Metadata/Candidate.js";
+import { CandidateLayout } from "./layouts/CandidateLayout.js";
 
 const router = createBrowserRouter([
   {
@@ -114,6 +117,95 @@ const router = createBrowserRouter([
                 request: request,
                 api: "JobListAPI",
                 redirectURL: "/Jobs",
+              }),
+          },
+          {
+            path: "/Candidates",
+            element: (
+              <RecordList
+                createListViewMeta={CandidateListView}
+                title="Candidates"
+                recordURL="/Candidate/"
+                recordIdField="_id"
+              />
+            ),
+            loader: () => recordListLoader("CandidateListAPI"),
+            action: () => recordListAction("/Candidate"),
+          },
+          {
+            path: "/Candidate/:candidateId",
+            element: (
+              <RecordViewPage
+                objectName={CandidateMetadata.objectName}
+                icon={CandidateMetadata.getIcon}
+                pageLayout={CandidateLayout}
+                buttons={["Edit", "Delete", "Back"]}
+                backURL="/Candidates"
+              />
+            ),
+            loader: ({ params }) =>
+              recordViewLoader({
+                recordId: params.candidateId,
+                api: "CandidateListAPI",
+              }),
+          },
+          {
+            path: "/Candidate/:candidateId/edit",
+            element: (
+              <RecordEditPage
+                objectName={CandidateMetadata.objectName}
+                icon={CandidateMetadata.getIcon}
+                pageLayout={CandidateLayout}
+                buttons={["Save", "Cancel"]}
+              />
+            ),
+            loader: ({ params }) =>
+              recordViewLoader({
+                recordId: params.candidateId,
+                api: "CandidateListAPI",
+              }),
+            action: ({ request, params }) =>
+              editRecordAction({
+                request,
+                recordId: params.candidateId,
+                api: "CandidateListAPI",
+                objectName: CandidateMetadata.objectName,
+              }),
+          },
+          {
+            path: "/Candidate",
+            element: (
+              <RecordEditPage
+                objectName={CandidateMetadata.objectName}
+                icon={CandidateMetadata.getIcon}
+                pageLayout={CandidateLayout}
+                buttons={["Save", "Cancel"]}
+              />
+            ),
+            loader: () => recordViewLoader({ api: "CandidateListAPI" }),
+            action: ({ request, params }) =>
+              editRecordAction({
+                request,
+                api: "CandidateListAPI",
+                objectName: CandidateMetadata.objectName,
+              }),
+          },
+          {
+            path: "/Candidate/:candidateId/destroy",
+            action: ({ params }) =>
+              deleteRecordAction({
+                api: "CandidateListAPI",
+                recordId: params.candidateId,
+                redirectURL: "/Candidates",
+              }),
+          },
+          {
+            path: "/Candidates/destroy",
+            action: ({ request }) =>
+              deleteRecordActionBulk({
+                request: request,
+                api: "CandidateListAPI",
+                redirectURL: "/Candidates",
               }),
           },
           {
