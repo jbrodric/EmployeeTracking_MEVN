@@ -167,7 +167,7 @@ export default function Root() {
                   </ListItemButton>
                 </ListItem>
                 <ListItem key={"Applications"} disablePadding>
-                  <ListItemButton component={NavLink} to={`/Applications`}>
+                  <ListItemButton component={NavLink} to={`/JobApplications`}>
                     <ListItemIcon>
                       <DriveFileRenameOutlineIcon />
                     </ListItemIcon>

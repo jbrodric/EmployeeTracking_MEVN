@@ -16,8 +16,6 @@ import { action as deleteRecordAction } from "./components/RecordPages/DeleteRec
 import { action as deleteRecordActionBulk } from "./components/RecordPages/DeleteRecordBulk.js";
 import About from "./components/About.js";
 import Home from "./components/Home.js";
-import Applications from "./components/Applications.js";
-import Candidates from "./components/Candidates.js";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { StdJobListView } from "./listViews/JobListView.js";
@@ -26,6 +24,9 @@ import { StdJobLayout } from "./layouts/JobLayout.js";
 import { CandidateListView } from "./listViews/CandidateListView.js";
 import CandidateMetadata from "./Object Metadata/Candidate.js";
 import { CandidateLayout } from "./layouts/CandidateLayout.js";
+import { JobApplicationListView } from "./listViews/JobApplicationListView.js";
+import JobApplicationMetadata from "./Object Metadata/JobApplication.js";
+import { JobApplicationLayout } from "./layouts/JobApplicationLayout.js";
 
 const router = createBrowserRouter([
   {
@@ -209,20 +210,101 @@ const router = createBrowserRouter([
               }),
           },
           {
+            path: "/JobApplications",
+            element: (
+              <RecordList
+                createListViewMeta={JobApplicationListView}
+                title="Job Applications"
+                recordURL="/JobApplication/"
+                recordIdField="_id"
+              />
+            ),
+            loader: () => recordListLoader("JobAppListAPI"),
+            action: () => recordListAction("/JobApplication"),
+          },
+          {
+            path: "/JobApplication/:jobApplicationId",
+            element: (
+              <RecordViewPage
+                objectName={JobApplicationMetadata.objectName}
+                icon={JobApplicationMetadata.getIcon}
+                pageLayout={JobApplicationLayout}
+                buttons={["Edit", "Delete", "Back"]}
+                backURL="/JobApplications"
+              />
+            ),
+            loader: ({ params }) =>
+              recordViewLoader({
+                recordId: params.jobApplicationId,
+                api: "JobAppListAPI",
+              }),
+          },
+          {
+            path: "/JobApplication/:jobApplicationId/edit",
+            element: (
+              <RecordEditPage
+                objectName={JobApplicationMetadata.objectName}
+                icon={JobApplicationMetadata.getIcon}
+                pageLayout={JobApplicationLayout}
+                buttons={["Save", "Cancel"]}
+              />
+            ),
+            loader: ({ params }) =>
+              recordViewLoader({
+                recordId: params.jobApplicationId,
+                api: "JobAppListAPI",
+              }),
+            action: ({ request, params }) =>
+              editRecordAction({
+                request,
+                recordId: params.jobApplicationId,
+                api: "JobAppListAPI",
+                objectName: JobApplicationMetadata.objectName.replace(" ", ""),
+              }),
+          },
+          {
+            path: "/JobApplication",
+            element: (
+              <RecordEditPage
+                objectName={JobApplicationMetadata.objectName}
+                icon={JobApplicationMetadata.getIcon}
+                pageLayout={JobApplicationLayout}
+                buttons={["Save", "Cancel"]}
+              />
+            ),
+            loader: () => recordViewLoader({ api: "JobAppListAPI" }),
+            action: ({ request, params }) =>
+              editRecordAction({
+                request,
+                api: "JobAppListAPI",
+                objectName: JobApplicationMetadata.objectName.replace(" ", ""),
+              }),
+          },
+          {
+            path: "/JobApplication/:jobApplicationId/destroy",
+            action: ({ params }) =>
+              deleteRecordAction({
+                api: "JobAppListAPI",
+                recordId: params.jobApplicationId,
+                redirectURL: "/JobApplications",
+              }),
+          },
+          {
+            path: "/JobApplications/destroy",
+            action: ({ request }) =>
+              deleteRecordActionBulk({
+                request: request,
+                api: "JobAppListAPI",
+                redirectURL: "/JobApplications",
+              }),
+          },
+          {
             path: "/About",
             element: <About />,
           },
           {
             path: "/",
             element: <Home />,
-          },
-          {
-            path: "/Applications",
-            element: <Applications />,
-          },
-          {
-            path: "/Candidates",
-            element: <Candidates />,
           },
         ],
       },
