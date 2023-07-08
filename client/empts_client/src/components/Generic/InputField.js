@@ -1,4 +1,4 @@
-import { TextField, Box } from "@mui/material";
+import { TextField, Box, Typography } from "@mui/material";
 import React from "react";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import dayjs from "dayjs";
@@ -178,6 +178,23 @@ export default function InputField(props) {
             defaultValue={data}
             multiline
             rows={4}
+            fullWidth
+            size="small"
+            required={metadata.required}
+          />
+        </Box>
+      );
+      break;
+    case "lookup":
+      ret = (
+        <Box sx={{ height: "100%", position: "relative" }}>
+          <Typography variant="caption">{data[metadata.recordName]}</Typography>
+          <TextField
+            id={metadata.name}
+            label={metadata.label}
+            variant="outlined"
+            name={metadata.name}
+            defaultValue={data[metadata.recordId]}
             fullWidth
             size="small"
             required={metadata.required}
