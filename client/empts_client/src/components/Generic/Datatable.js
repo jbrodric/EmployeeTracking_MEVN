@@ -412,7 +412,7 @@ export default function EnhancedTable(props) {
                             {
                               new Array(
                                 (() => {
-                                  if (headCell.type === "checkbox")
+                                  if (headCell.type === "checkbox") {
                                     return (
                                       <Checkbox
                                         id={
@@ -430,7 +430,18 @@ export default function EnhancedTable(props) {
                                         sx={{ padding: 0 }}
                                       />
                                     );
-                                  else return formattedData;
+                                  } else if (headCell.type === "lookup") {
+                                    return (
+                                      <Link
+                                        to={
+                                          headCell.url +
+                                          formattedData[headCell.recordId]
+                                        }
+                                      >
+                                        {formattedData[headCell.recordName]}
+                                      </Link>
+                                    );
+                                  } else return formattedData;
                                 })()
                               )
                             }

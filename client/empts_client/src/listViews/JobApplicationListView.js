@@ -15,6 +15,9 @@ export function JobApplicationListView() {
       type: "lookup",
       disablePadding: false,
       label: "Job Posting",
+      recordId: "_id",
+      recordName: "name",
+      url: "/Job/",
     },
     {
       id: "desiredSalary",
@@ -31,6 +34,9 @@ export function JobApplicationListView() {
       type: "lookup",
       disablePadding: false,
       label: "Candidate",
+      recordId: "_id",
+      recordName: "name",
+      url: "/candidate/",
     },
   ];
 }

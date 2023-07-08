@@ -25,17 +25,27 @@ export default function OutputField(props) {
         </Box>
       );
     case "lookup":
-      return (
-        <Box sx={{ height: "100%", position: "relative" }}>
-          <Typography variant="subtitle2">{metadata.label}</Typography>
-          <Link to={metadata.url + formattedData}>
-            <Typography variant="caption">
-              {formattedData ? formattedData : <>&nbsp;</>}
-            </Typography>
-          </Link>
-          <Divider absolute={true} />
-        </Box>
-      );
+      if (!formattedData) {
+        return (
+          <Box sx={{ height: "100%", position: "relative" }}>
+            <Typography variant="subtitle2">{metadata.label}</Typography>
+            <Typography variant="caption">{<>&nbsp;</>}</Typography>
+            <Divider absolute={true} />
+          </Box>
+        );
+      } else {
+        return (
+          <Box sx={{ height: "100%", position: "relative" }}>
+            <Typography variant="subtitle2">{metadata.label}</Typography>
+            <Link to={metadata.url + formattedData[metadata.recordId]}>
+              <Typography variant="caption">
+                {formattedData[metadata.recordName]}
+              </Typography>
+            </Link>
+            <Divider absolute={true} />
+          </Box>
+        );
+      }
     case "picklist":
     case "number":
     case "currency":
