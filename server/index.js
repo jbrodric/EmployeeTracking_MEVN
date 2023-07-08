@@ -45,21 +45,21 @@ function initAPIRoutes(app) {
     initRecordListModel(mongoose, initJobPosting, getJobPostingSchema, "Job")
   );
   app.use(
-    process.env.API_JOB_APP_LIST_PATH,
-    initRecordListModel(
-      mongoose,
-      initJobApplication,
-      getJobApplicationSchema,
-      "Job Application"
-    )
-  );
-  app.use(
     process.env.API_CANDIDATE_LIST_PATH,
     initRecordListModel(
       mongoose,
       initCandidate,
       getCandidateSchema,
       "Candidate"
+    )
+  );
+  app.use(
+    process.env.API_JOB_APP_LIST_PATH,
+    initRecordListModel(
+      mongoose,
+      initJobApplication,
+      getJobApplicationSchema,
+      "Job Application"
     )
   );
 }

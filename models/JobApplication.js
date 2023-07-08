@@ -7,14 +7,16 @@ module.exports.initJobApplication = (mongoose) => {
       required: true,
     },
     jobPostingId: {
-      type: "ObjectId",
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "jobposting",
       required: true,
     },
     desiredSalary: {
       type: mongoose.Schema.Types.Decimal128,
     },
     candidateId: {
-      type: "ObjectId",
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "candidate",
       required: true,
     },
   });
